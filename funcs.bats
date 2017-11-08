@@ -29,6 +29,7 @@ teardown() {
 }
 
 @test "throw error differing files using id_ascii_files" {
+  skip
   run id_ascii_files ./data_expected/id_1.dat ./data_expected/diff.dat 0.
   [ $status = 0 ]
 }
