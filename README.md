@@ -16,7 +16,7 @@ There are three files:
 
 # Dependencies
 
-GAMBIT and BATS. See [the bats repo](https://github.com/sstephenson/bats) for installation instructions.
+Other than GAMBIT, we require (numdiff)[https://github.com/tjhei/numdiff] and [BATS](https://github.com/sstephenson/bats).
 
 # Writing a YAML test
 
