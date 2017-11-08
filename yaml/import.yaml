@@ -1,0 +1,32 @@
+# BATS test for GAMBIT with relative import
+#
+# Written by A. Fowlie.
+
+Parameters: 
+  !import imported.yaml 
+  
+Printer:
+  printer: ascii
+  options:
+    output_file: "dummy.dat"
+
+Scanner:
+  use_scanner: multinest
+  scanners:
+    multinest:
+      plugin: multinest
+      like: Likelihood
+      nlive: 10
+      tol: 1E5
+      seed: 1
+
+ObsLikes:
+  - purpose: Likelihood
+    capability: normaldist_loglike
+    module: ExampleBit_A
+    type: double
+
+KeyValues:
+  default_output_path: "data_gambit/dummy"
+  likelihood:
+    model_invalid_for_lnlike_below: -1e6

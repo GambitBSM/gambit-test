@@ -1,0 +1,11 @@
+# BATS test for GAMBIT with relative import
+#
+# This file is imported.
+#
+# Written by A. Fowlie.
+
+NormalDist:
+  mu: 
+    range: [-100., 100.]
+  sigma:
+    range: [0., 100.]
