@@ -16,7 +16,7 @@ There are three files:
 
 # Dependencies
 
-Other than GAMBIT, we require (numdiff)[https://github.com/tjhei/numdiff] and [BATS](https://github.com/sstephenson/bats).
+Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff) and [BATS](https://github.com/sstephenson/bats).
 
 # Writing a YAML test
 
