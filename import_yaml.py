@@ -5,7 +5,7 @@ Modified PyYAML that supports !import keyword
 Also supports lists as YAML keys.
 """
 
-import os.path
+import os
 import yaml
 
 
@@ -21,7 +21,10 @@ class ImportLoader(yaml.Loader):
     https://stackoverflow.com/a/9577670/2855071
     """
     def __init__(self, stream):
-        self._root = os.path.split(stream.name)[0]
+        try:
+            self._root = os.path.split(stream.name)[0]
+        except AttributeError:
+            self._root = os.getcwd()
         super(ImportLoader, self).__init__(stream)
 
     def import_(self, node):
