@@ -22,7 +22,12 @@ def yaml_to_bash(yaml_name):
     with open(yaml_name) as yaml_file:
         data = load(yaml_file)
 
-    bash = ['{}_{}="{}"'.format(BLOCK, k, data[BLOCK][k]) for k in KEYS]
+    try:
+        bash = ['{}_{}="{}"'.format(BLOCK, k, data[BLOCK][k]) for k in KEYS]
+    except (TypeError, IndexError):
+        error = "YAML didn't contain {} block with {} keys".format(BLOCK, KEYS)
+        raise RuntimeError(error)
+
     bash = ";".join(bash)
     return bash
 
