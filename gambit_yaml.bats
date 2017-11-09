@@ -8,7 +8,7 @@
 
 load funcs
 load gambit
-load yaml
+load pyyaml
 
 # Remove output files if present (shouldn't be)
 setup() {
