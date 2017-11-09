@@ -1,6 +1,8 @@
 """
 Modified PyYAML that supports !import keyword
 =============================================
+
+Also supports lists as YAML keys.
 """
 
 import os.path
@@ -33,7 +35,18 @@ class ImportLoader(yaml.Loader):
         with open(yamal_name, 'r') as yamal_file:
             return yaml.load(yamal_file, ImportLoader)
 
+    def construct_tuple(self, node):
+        """
+        Permit lists as YAML keys.
+        
+        https://gist.github.com/miracle2k/3184458#file-tuple-py
+        """
+        return tuple(ImportLoader.construct_sequence(self, node))
+
+
+ImportLoader.add_constructor(u'tag:yaml.org,2002:seq', ImportLoader.construct_tuple)
 ImportLoader.add_constructor(IMPORT_TAG, ImportLoader.import_)
+
 
 def load(stream):
     """
