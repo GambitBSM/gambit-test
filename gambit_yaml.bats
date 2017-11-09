@@ -12,7 +12,7 @@ load pyyaml
 
 # Remove output files if present (shouldn't be)
 setup() {
-  # rm -rf data_gambit
+  rm -rf data_gambit/*
   rm -f Key.dat  # TODO: This file should never be generated
   rm -rf $GAMBIT/runs
   rm -rf runs  # TODO: This file should never be generated
@@ -22,7 +22,6 @@ setup() {
 # Remove output files if present (should be in most cases)
 teardown() {
   error "$output"
-  # rm -rf data_gambit
   rm -f Key.dat  # TODO: This file should never be generated
   rm -rf $GAMBIT/runs
   rm -rf runs  # TODO: This file should never be generated
