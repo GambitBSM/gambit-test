@@ -1,3 +1,4 @@
 *~
 data_gambit/*
-!data_gambit/.gitkeep 
+!data_gambit/.gitkeep
+*.pyc
