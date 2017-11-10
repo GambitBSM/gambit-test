@@ -97,10 +97,19 @@ Rules:
       fast: 1
       
   # Choose where to get the precision spectrum from
+  
   - capability: MSSM_spectrum
-    type: Spectrum
-    function: make_MSSM_precision_spectrum_none
-      
+    function: make_MSSM_precision_spectrum_4H_W
+    module: PrecisionBit
+    
+  - capability: prec_mh
+    function: FH_HiggsMass
+    module: SpecBit
+
+  - capability: unimproved_MSSM_spectrum
+    function: get_CMSSM_spectrum_FS
+    module: SpecBit
+   
 KeyValues:
   default_output_path: "data_gambit/DarkBit_lnL_oh2"
   likelihood:
