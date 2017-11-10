@@ -3,7 +3,7 @@
 # Written by A. Fowlie.
 
 Test:
-  gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat_0
+  gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat
   expected: ./data_expected/DarkBit_lnL_oh2.expected
   rtol: 1E-3
 
