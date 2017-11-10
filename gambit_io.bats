@@ -10,15 +10,13 @@ load funcs
 load gambit
 
 setup() {
-  rm -rf "$GAMBIT"/runs
-  rm -rf runs  # TODO: This file should never be generated
+  :
 }
 
 # Echo information on teardown, if error
 teardown() {
   error "$output"
-  rm -rf $GAMBIT/runs
-  rm -rf runs  # TODO: This file should never be generated
+  rm -rf ./runs  # This shouldn't be neccessary
 }
 
 # BAT framework tests - make information as descriptive as possible.
@@ -56,4 +54,9 @@ teardown() {
 @test "runs folder from empty yaml" {
   run "$GAMBIT"/gambit -f ./yaml/empty.yaml
   [ ! -e $GAMBIT/runs ]
+}
+
+@test "local runs folder from empty yaml" {
+  run "$GAMBIT"/gambit -f ./yaml/empty.yaml
+  [ ! -e ./runs ]
 }

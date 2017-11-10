@@ -12,10 +12,7 @@ load pyyaml
 
 # Remove output files if present (shouldn't be)
 setup() {
-  rm -rf data_gambit/*
-  rm -f Key.dat  # TODO: This file should never be generated
-  rm -rf $GAMBIT/runs
-  rm -rf runs  # TODO: This file should never be generated
+  :
 }
 
 # Echo information on teardown, if error
@@ -23,8 +20,6 @@ setup() {
 teardown() {
   error "$output"
   rm -f Key.dat  # TODO: This file should never be generated
-  rm -rf $GAMBIT/runs
-  rm -rf runs  # TODO: This file should never be generated
 }
 
 # BAT framework tests - make information as descriptive as possible.
