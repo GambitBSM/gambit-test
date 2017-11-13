@@ -19,6 +19,7 @@ setup() {
 # Remove output files if present (should be in most cases)
 teardown() {
   error "$output"
+  error email = "$Test_email"
   rm -f Key.dat  # TODO: This file should never be generated
 }
 
