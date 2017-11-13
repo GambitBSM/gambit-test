@@ -27,7 +27,7 @@ The YAML files must contain a special `Test` block with testing information, e.g
       gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat_0  # Result produced by YAML file
       expected: ./data_expected/DarkBit_lnL_oh2.expected  # Expected result
       rtol: 1E-3  # Acceptable relative error in result
-      email: Contact email address
+      email: name@domain.com  # Contact email addresses separated by whitespace
     
 There are four mandatory recognized entries: `gambit`, `expected`, `rtol` and `email`.
     
