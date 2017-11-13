@@ -8,7 +8,14 @@
 bats_fail_email() {
 
   local tap=$1
-  email=$(grep 'email =' "$tap" | cut -c11-)
-  export BATS_FAIL_EMAIL="$email"
+  grep 'email =' "$tap" | cut -c11-
 }
 
+git_fail_email() {
+
+  local git=$1
+  (
+  cd "$git"
+  git log --format='%ae' -n 1
+  )
+}
