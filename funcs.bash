@@ -15,7 +15,7 @@ id_ascii_files() {
   local file_1=$1
   local file_2=$2
   local rtol=$3
-  echo "$rtol" "$file_1" "$file_2"
+
   numdiff -r "$rtol" "$file_1" "$file_2"
 }
 
