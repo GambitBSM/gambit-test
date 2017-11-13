@@ -8,7 +8,7 @@ from import_yaml import load
 
 
 BLOCK = "Test"
-KEYS = ["gambit", "expected", "rtol"]
+KEYS = ["gambit", "expected", "rtol", "email"]
 
 
 def yaml_to_bash(yaml_name):

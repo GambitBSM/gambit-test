@@ -16,7 +16,8 @@ There are three files:
 
 # Dependencies
 
-Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff) and [BATS](https://github.com/sstephenson/bats).
+Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [BATS](https://github.com/sstephenson/bats) and
+[PyYAML](https://pypi.python.org/pypi/PyYAML).
 
 # Writing a YAML test
 
@@ -26,8 +27,9 @@ The YAML files must contain a special `Test` block with testing information, e.g
       gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat_0  # Result produced by YAML file
       expected: ./data_expected/DarkBit_lnL_oh2.expected  # Expected result
       rtol: 1E-3  # Acceptable relative error in result
+      email: Contact email address
     
-There are three recognized entries: `gambit`, `expected` and `rtol`.
+There are four mandatory recognized entries: `gambit`, `expected`, `rtol` and `email`.
     
 # Adding YAML test to BATS
 

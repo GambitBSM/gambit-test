@@ -10,6 +10,7 @@ Test:
   gambit: ./data_gambit/ColliderBit_LEPSUSY/samples/ColliderBit_LEPSUSY.dat
   expected: ./data_expected/ColliderBit_LEPSUSY.expected
   rtol: 1E-3
+  email: ahye@fys.uio.no
 
 Parameters:
   StandardModel_SLHA2:
