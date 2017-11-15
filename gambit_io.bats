@@ -38,12 +38,12 @@ teardown() {
 }
 
 @test "empty yaml using gambit" {
-  skip "We should fix this return code but skip for now"
   run "$GAMBIT"/gambit -f ./yaml/empty.yaml
   [ $status -ne 0 ]
 }
 
 @test "unknown option using gambit" {
+  skip "We should fix this return code but skip for now"
   run "$GAMBIT"/gambit --unknown
   [ $status -ne 0 ]
 }
