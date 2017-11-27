@@ -1,0 +1,172 @@
+##########################################################################
+## GAMBIT configuration for testing DecayBit, printing out a decay table
+## for MSSM20 at a single model point.
+##
+## Only needs DecayBit and backend SUSYHIT.
+##########################################################################
+
+
+Test:
+  gambit: ./data_gambit/DecayBit_MSSM20/samples/results.txt_0
+  expected: ./data_gambit/DecayBit_MSSM20/samples/results.txt_0.expected
+  rtol: 1E-1
+  email: p.scott@imperial.ac.uk
+
+Parameters:
+
+  # SM parameters.
+  StandardModel_SLHA2:
+    alphainv:  1.27940010E+02 # alpha^{-1}(mZ)^MSbar *
+    GF      :  1.16637870E-05 # G_Fermi **
+    alphaS  :  1.18500000E-01 # alpha_s(mZ)^MSbar ^
+    mZ      :  9.11876000E+01 # mZ(pole) !
+    mBmB    :  4.18000000E+00 # mb(mb)^MSbar &
+    mT      :  1.73340000E+02 # mtop(pole) $
+    mTau    :  1.77682000E+00 # mtau(pole) §
+    mNu3    :               0 # mnu3(pole)
+    mE      :  5.10998928E-04 # melectron(pole) § **
+    mNu1    :               0 # mnu1(pole)
+    mMu     :  1.05658372E-01 # mmuon(pole) §
+    mNu2    :               0 # mnu2(pole)
+    mD      :  4.80000000E-03 # md(2 GeV)^MSbar @
+    mU      :  2.30000000E-03 # mu(2 GeV)^MSbar @
+    mS      :  9.50000000E-02 # ms(2 GeV)^MSbar @
+    mCmC    :  1.27500000E+00 # mc(mc)^MSbar %
+    CKM_lambda  :  0.22537
+    CKM_A       :  0.814
+    CKM_rhobar  :  0.117
+    CKM_etabar  :  0.353
+    theta12 :  0.58376 # solar angle
+    theta23 :  0.76958 # atmospheric mixing angle
+    theta13 :  0.15495 #
+    delta13 :  0       # Dirac CP-violating phase
+    alpha1  :  0       # first Majorana CP-violating phase
+    alpha2  :  0       # second CP-violating Majorana phase
+
+  # SUSY parameters.
+  MSSM20atQ:
+    Qin: 1.9422e+16
+    SignMu: 1
+    TanBeta: 10
+    mHu2: 15625
+    mHd2: 15625
+
+    M1: 500
+    M2: 500
+    M3: 500
+
+    mq2_12: 15625.0
+    mq2_3: 15625.0
+
+    ml2_12: 15625.0
+    ml2_3: 15625.0
+
+    md2_12: 15625.0
+    md2_3: 15625.0
+
+    mu2_12: 15625.0
+    mu2_3: 15625.0
+
+    me2_12: 15625.0
+    me2_3: 15625.0
+
+    Ae_12: 0
+    Ae_3: 0
+    Ad_3: 0
+    Au_3: 0
+
+
+Priors:
+
+  # All the priors are simple for this scan, so they are specified directly in the Parameters section.
+
+
+Scanner:
+
+  use_scanner: random
+
+  scanners:
+
+    random:
+      plugin: random
+      point_number: 1
+      like:  LogLike
+      printme: false
+
+
+ObsLikes:
+
+  # Test DecayBit
+  - purpose:      Test
+    capability:   decay_rates
+    type:         DecayTable
+    printme: false
+
+
+Rules:
+
+  - capability: unimproved_MSSM_spectrum
+    function: get_MSSMatQ_spectrum_FS
+
+  - capability: Higgs_decay_rates
+    function: MSSM_h0_1_decays
+
+  - capability: h0_2_decay_rates
+    function: h0_2_decays
+
+  - capability: A0_decay_rates
+    function: A0_decays
+
+  - capability: H_plus_decay_rates
+    function: H_plus_decays
+
+  - capability: decay_rates
+    function: all_decays
+
+  - capability: MSSM_spectrum
+    function: make_MSSM_precision_spectrum_H_W
+    options:
+      Higgs_predictions_source: 1
+      Higgs_predictions_error_method: 4
+
+  - capability: prec_mh
+    function: FH_HiggsMass
+
+  #- function: SUSY_HIT_1_5_init
+  #  options:
+  #    debug_SLHA_filenames:
+  #      - path/to/your.slha
+
+
+Printer:
+
+  printer: ascii
+  options:
+    output_file: "results.txt"
+
+
+Logger:
+
+  # Redirection of specific messages according to tags
+  redirection:
+    [Debug] : "debug.log"
+    [Default] : "default.log"
+    [Error] : "errors.log"
+    [Warning] : "warnings.log"
+    [Core,Error] : "core_errors.log"
+    [Core,Error,Fatal] : "fatal_core_errors.log"
+    [Dependency Resolver] : "dependency_resolver.log"
+    [DecayBit] : "DecayBit.log"
+
+
+KeyValues:
+
+  dependency_resolution:
+    prefer_model_specific_functions: true
+
+  likelihood:
+    model_invalid_for_lnlike_below: -1e6
+
+  default_output_path: "data_gambit/DecayBit_MSSM20"
+
+  debug: true
