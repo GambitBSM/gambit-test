@@ -49,6 +49,22 @@ teardown() {
   [ $status = 0 ]
 }
 
+@test "DecayBit_MSSM20 with gambit" {
+  local test=DecayBit_MSSM20_BATS
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
+@test "PrecisionBit_MSSM20 with gambit" {
+  local test=PrecisionBit_MSSM20_BATS
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
 @test "Key.dat file from gambit" {
   skip "I suspect this file shoudn't be generated but skip for now"
   local test=DarkBit_lnL_oh2
