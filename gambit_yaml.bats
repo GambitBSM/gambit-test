@@ -73,3 +73,23 @@ teardown() {
   run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
   [ ! -e Key.dat ]
 }
+
+# ScannerBit tests
+
+@test "ScannerBit_multinest with gambit" {
+  local test=ScannerBit_multinest
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
+@test "ScannerBit_diver with gambit" {
+  local test=ScannerBit_diver
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
+
