@@ -1,0 +1,84 @@
+##########################################################################
+## GAMBIT example configuration for the scanner system.
+##
+## This example configures ScannerBit to explore a EggBox likelihood using
+## the multinest sampler.  Also include are instructions to use other
+## likelihoods and scanners.
+##########################################################################
+
+# BATS testing parameters
+Test:
+  gambit: ./data_gambit/ScannerBit_diver/samples/ScannerBit_diver.dat_0
+  expected: ./data_expected/ScannerBit_diver.expected
+  rtol: 1E-9
+  email: ben.farmer@gmail.com
+
+Parameters:
+
+  # None -- we're using ScannerBit's built-in objective functions in this example
+
+
+Priors:
+
+  # None -- we're using ScannerBit's built-in objective functions in this example
+
+
+Printer:
+
+  # Select printer to use via string tag)
+  printer: ascii
+
+  options:
+    output_file: "ScannerBit_diver.dat"
+ 
+
+Scanner:
+
+  use_objectives: EggBox
+
+  use_scanner: de
+
+  scanners:
+
+    de:
+      plugin: diver
+      like: LogLike
+      NP: 1000
+      path: "runs"
+      verbosity: 1
+      seed: 1
+
+  objectives:
+
+     EggBox:
+      plugin: EggBox
+      purpose: LogLike
+      parameters:
+        param_0:
+          range: [0, 1]
+        param_1:
+          range: [0, 1]
+
+ObsLikes:
+
+  # None in this example: the objective function is not defined in terms of a model
+
+Rules:
+
+  # No model = no need for other Bits' capability rules
+
+Logger:
+
+  # Redirection of specific messages according to tags
+  redirection:
+    [Debug] : "debug.log"
+    [Default] : "default.log"
+    [Error] : "errors.log"
+    [Warning] : "warnings.log"
+
+KeyValues:
+
+  likelihood:
+    model_invalid_for_lnlike_below: -1e6
+
+  default_output_path: "data_gambit/ScannerBit_diver"
