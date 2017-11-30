@@ -8,7 +8,7 @@
 
 # BATS testing parameters
 Test:
-  gambit: ./data_gambit/ScannerBit_diver/samples/ScannerBit_diver.dat_0
+  gambit: ./data_gambit/ScannerBit_diver/samples/ScannerBit_diver.dat
   expected: ./data_expected/ScannerBit_diver.expected
   rtol: 1E-9
   email: ben.farmer@gmail.com
