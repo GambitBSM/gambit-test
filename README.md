@@ -24,13 +24,14 @@ Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [BATS
 The YAML files must contain a special `Test` block with testing information, e.g.,
 
     Test:
-      gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat_0  # Result produced by YAML file
+      gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat  # Result produced by YAML file
       expected: ./data_expected/DarkBit_lnL_oh2.expected  # Expected result
       rtol: 1E-3  # Acceptable relative error in result
       email: name@domain.com  # Contact email addresses separated by whitespace
     
-There are four mandatory recognized entries: `gambit`, `expected`, `rtol` and `email`.
-    
+There are four mandatory recognized entries: `gambit`, `expected`, `rtol` and `email`. Note that gambit on Jenkins produces data files *without* an `_0` suffix so don't include it. This may differ from behaviour on your computer.
+
+  
 # Adding YAML test to BATS
 
 Add a test to `gambit_yaml.bats` by coping this template:
