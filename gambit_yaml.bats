@@ -25,14 +25,6 @@ teardown() {
 
 # BAT framework tests - make information as descriptive as possible.
 
-@test "ScannerBit_multinest with gambit" {
-  local test=ScannerBit_multinest
-  local yaml=./yaml/$test.yaml
-  source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
-  [ $status = 0 ]
-}
-
 @test "DarkBit_lnL_oh2 with gambit" {
   local test=DarkBit_lnL_oh2
   local yaml=./yaml/$test.yaml
