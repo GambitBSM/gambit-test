@@ -1,0 +1,299 @@
+# GAMBIT Initialization file (in YAML)
+#
+# Tests ColliderBit LHC likelihood for a single CMSSM point
+#
+# Anders Kvellestad <anders.kvellestad@fys.uio.no>
+# December 2017
+
+Test:
+  gambit: ./data_gambit/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
+  expected: ./data_expected/ColliderBit_eventloop.expected
+  rtol: 1E-1
+  email: anders.kvellestad@fys.uio.no
+
+Parameters:
+  StandardModel_SLHA2:
+
+    # SLHA1
+    alphainv:  1.27940010E+02 # alpha^{-1}(mZ)^MSbar *
+    GF      :  1.16637870E-05 # G_Fermi **
+    alphaS  :  1.18500000E-01 # alpha_s(mZ)^MSbar ^
+    mZ      :  9.11876000E+01 # mZ(pole) !
+    mBmB    :  4.18000000E+00 # mb(mb)^MSbar &
+    mT      :  1.73340000E+02 # mtop(pole) $
+    mTau    :  1.77682000E+00 # mtau(pole) §
+    mNu3    :               0 # mnu3(pole)
+    
+    # SLHA2
+    mE      :  5.10998928E-04 # melectron(pole) § **
+    mNu1    :               0 # mnu1(pole)
+    mMu     :  1.05658372E-01 # mmuon(pole) §
+    mNu2    :               0 # mnu2(pole)
+    mD      :  4.80000000E-03 # md(2 GeV)^MSbar @
+    mU      :  2.30000000E-03 # mu(2 GeV)^MSbar @
+    mS      :  9.50000000E-02 # ms(2 GeV)^MSbar @
+    mCmC    :  1.27500000E+00 # mc(mc)^MSbar %
+
+    # CKM
+    CKM_lambda  :  0.22537
+    CKM_A       :  0.814
+    CKM_rhobar  :  0.117
+    CKM_etabar  :  0.353
+
+    # PMNS 
+    theta12 :  0.58376 # solar angle
+    theta23 :  0.76958 # atmospheric mixing angle
+    theta13 :  0.15495 #                                    
+    delta13 :  0       # Dirac CP-violating phase
+    alpha1  :  0       # first Majorana CP-violating phase
+    alpha2  :  0       # second CP-violating Majorana phase
+
+  CMSSM:
+    M0:    1000.0
+    M12:    400.0
+    A0:   -2000.0
+    TanBeta: 30.0
+    SignMu:   1
+
+Printer:
+  printer: ascii
+  options:
+    output_file: "ColliderBit_eventloop.dat"
+
+Scanner:
+  use_scanner: random
+  scanners:
+    random:
+      plugin: random
+      output_file: output
+      like: LogLike
+      point_number: 1
+      files:
+        output_file: "ColliderBit_eventloop.random.dat"
+
+ObsLikes:
+
+    # Test the LHC likelihood
+    - purpose:    LogLike
+      capability: LHC_Combined_LogLike
+
+
+Rules:
+
+  # Choose to get decays from DecayBit proper, not from an SLHA file.
+  - capability: decay_rates
+    function: all_decays
+
+  # Choose to get the spectrum from SpecBit proper, not an SLHA file.
+  - capability: unimproved_MSSM_spectrum
+    function: get_CMSSM_spectrum_FS
+    options:
+      # Set to match benchmark point specified in
+      # SpecBit/MSSM_benchmark_points/LesHouches.in.MSSM_1
+      precision_goal:        1.0e-4
+      max_iterations:        0
+      calculate_sm_masses:   false
+      pole_mass_loop_order:  2
+      ewsb_loop_order:       2
+      beta_loop_order:       2
+      threshold_corrections_loop_order: 1
+      use_higgs_2loop_at_as: true
+      use_higgs_2loop_ab_as: true
+      use_higgs_2loop_at_at: true
+      use_higgs_2loop_atau_atau: true
+      invalid_point_fatal: false
+
+  # Choose where to get the precision spectrum from
+  - capability: MSSM_spectrum
+    type: Spectrum
+    function: make_MSSM_precision_spectrum_none
+
+  # These options set various tolerances in the spectrum generation
+  - options:
+      gauge_mixing_tolerance: 0.5
+      family_mixing_tolerance: 0.5
+      #gauge_mixing_tolerance_invalidates_point_only: false
+      #family_mixing_tolerance_invalidates_point_only: false
+
+  # Choose to use functions that get Higgs decays from SUSY-HIT, and t decays from DecayBit native implementation (instead of FeynHiggs)
+  - capability: Reference_SM_Higgs_decay_rates
+    function: Ref_SM_Higgs_decays_table
+  - capability: Reference_SM_other_Higgs_decay_rates
+    function: Ref_SM_other_Higgs_decays_table
+  - capability: Reference_SM_A0_decay_rates
+    function: Ref_SM_A0_decays_table
+  - capability: Higgs_decay_rates
+    function: MSSM_h0_1_decays
+  - capability: h0_2_decay_rates
+    function: h0_2_decays
+  - capability: A0_decay_rates
+    function: A0_decays
+  - capability: H_plus_decay_rates
+    function: H_plus_decays
+  - capability: t_decay_rates
+    function: t_decays
+
+ # Choose where to get the Higgs couplings from
+  - capability: Higgs_Couplings
+    function: MSSM_higgs_couplings_pwid
+
+  ##### LHC Detector and Analysis rules #####
+  #
+  # The current capability structure allows for the user to mix'n'match
+  # collider settings, detector sims and analyses. The user may run BuckFastATLAS
+  # with ATLAS analyses, BuckFastCMS with CMS analyses, and Delphes with any analyses,
+  # for various configurations of Pythia.
+  #
+  # The way to turn the detectors on or off is via the boolean option useDetector for
+  # the module functions getDelphes, getBuckFastATLAS and getBuckFastCMS.
+  #
+  # NOTE: The use of Delphes currently only works when running with OMP_NUM_THREADS=1
+
+  # Choose number of events, and the type of Pythia object to run (this example here runs a SUSY example, which is what we want)
+  - capability:  ColliderOperator
+    function: operateLHCLoop
+    options:
+      nEvents: [50000, 50000]
+      pythiaNames: ["Pythia_SUSY_LHC_8TeV", "Pythia_SUSY_LHC_13TeV"]
+      silenceLoop: true
+
+
+  # Choose which getPythia to use
+  # For a scan, we use the one that does not expect an input SLHA file (i.e. do not use getPythiaFileReader)
+  # To run on an SLHA file, change "getPythia" to "getPythiaFildeReader" below, the uncomment the SLHA_filenames line
+  # Note that you must specify the path to the xmldoc
+  # Note also that you can use normal Pythia options here
+  - capability:  HardScatteringSim
+    function:  getPythia
+    options:
+      ### Pythia_doc_path defaults to the xmldoc directory of the default Pythia
+      ###   backend. So, this must only be set if the user chooses a different Pythia.
+      #Pythia_doc_path: "Backends/installed/Pythia/8.212/share/Pythia8/xmldoc/"
+      Pythia_SUSY_LHC_8TeV: ["Print:quiet = on",
+                             "PartonLevel:MPI = off",
+                             "PartonLevel:ISR = on",
+                             "PartonLevel:FSR = off",
+                             "HadronLevel:all = on",
+                             "SUSY:all = on",
+                             "TauDecays:mode = 0"]
+      Pythia_SUSY_LHC_13TeV: ["Print:quiet = on",
+                             "PartonLevel:MPI = off",
+                             "PartonLevel:ISR = on",
+                             "PartonLevel:FSR = off",
+                             "HadronLevel:all = on",
+                             "SUSY:all = on",
+                             "TauDecays:mode = 0"]
+      # Don't bother generating events if the estimated upper limit on the cross-section is below this value [fb].
+      # (The cross-section values 0.048 fb and 0.075 fb correspond to ~1 expected event at L = 20.7 fb^-1 and L = 13.3 fb^-1, respectively.)
+      xsec_vetos: [0.048, 0.075]
+
+      # Option needed if you want to use the getPythiaFileReader
+      # SLHA_filenames: ["path to SLHA file"]
+
+
+  # Delphes rules and options (ex. the Delphes configuration card file)
+  # NOTE: The use of Delphes currently only works when running with OMP_NUM_THREADS=1
+  - capability: DetectorSim
+    type: "Gambit::ColliderBit::DelphesVanilla"
+    function: getDelphes
+    options:
+      # useDetector defaults to false for getDelphes, which ignores all "Det" analyses and disables Delphes
+      useDetector: [false,false]
+      # Specify the location of the Delphes cards for the two Pythia instances (we assume ATLAS in both cases here)
+      delphesConfigFiles: ["ColliderBit/data/delphes_card_ATLAS.tcl","ColliderBit/data/delphes_card_ATLAS.tcl"]
+
+  # BuckFast for ATLAS rules and options
+  - capability: SimpleSmearingSim
+    type: "Gambit::ColliderBit::BuckFastSmearATLAS"
+    function: getBuckFastATLAS
+    options:
+      # useDetector defaults to true for getBuckFastATLAS. Set it to false to ignore all ATLAS analyses and disable the BuckFast ATLAS simulator
+      useDetector: [true,true]
+      # Choose which type of event to use: for parton level, change partonOnly to true
+      partonOnly: [false,false]
+      antiktR: [0.4,0.4]
+
+  # BuckFast for CMS rules and options
+  - capability: SimpleSmearingSim
+    type: "Gambit::ColliderBit::BuckFastSmearCMS"
+    function: getBuckFastCMS
+    options:
+      # useDetector defaults to true for getBuckFastCMS. Set it to false to ignore all CMS analyses and disable the BuckFast CMS simulator
+      useDetector: [true,false]
+      # Choose which type of event to use: for parton level, change partonOnly to true
+      partonOnly: [false,false]
+      antiktR: [0.4,0.4]
+
+  # Identity BuckFast rules and options (ex. the jet radius)
+  - capability: SimpleSmearingSim
+    type: "Gambit::ColliderBit::BuckFastIdentity"
+    function: getBuckFastIdentity
+    options:
+      #useDetector defaults to false for getBuckFastIdentity, which ignores all "Identity" analyses and disables the BuckFast Identity "simulator".
+      useDetector: [false,false]
+      # Choose which type of event to use: for parton level, change partonOnly to true
+      partonOnly: [false,false]
+      antiktR: [0.4,0.4]
+
+
+  # Specify the list of analyses to run after Delphes performs detector simulation
+  # NOTE: The use of Delphes currently only works when running with OMP_NUM_THREADS=1
+  - capability: DetAnalysisContainer
+    function: getDetAnalysisContainer
+    options:
+      analyses: [ [], [] ]
+
+  # Specify the list of ATLAS analyses to run with BuckFast
+  # These will get run if BuckFast is turned on
+  - capability: ATLASAnalysisContainer
+    function: getATLASAnalysisContainer
+    options:
+      analyses: [ ["ATLAS_0LEP_20invfb","ATLAS_0LEPStop_20invfb",
+                   "ATLAS_1LEPStop_20invfb","ATLAS_2bStop_20invfb",
+                   "ATLAS_2LEPEW_20invfb","ATLAS_2LEPStop_20invfb",
+                   "ATLAS_3LEPEW_20invfb"],
+                  ["ATLAS_13TeV_0LEP_13invfb"] ]
+
+  # Specify the list of CMS analyses to run with BuckFast
+  # These will get run if BuckFast is turned on
+  - capability: CMSAnalysisContainer
+    function: getCMSAnalysisContainer
+    options:
+      analyses: [ ["CMS_1LEPDMTOP_20invfb","CMS_2LEPDMTOP_20invfb",
+                   "CMS_3LEPEW_20invfb","CMS_MONOJET_20invfb"],
+                  [] ]
+
+  # Specify the list of identity analyses to run
+  # These will be run if the identity simulation is turned on
+  - capability: IdentityAnalysisContainer
+    function: getIdentityAnalysisContainer
+    options:
+      analyses: [ [], [] ]
+
+
+    # Use lognormal errors when marginalising the LHC Poisson likelihoods over systematic uncertainties
+    # Can change "_lognormal_" to "_gaussian_" if you prefer
+  - capability: LHC_Combined_LogLike
+    backends:
+    - {capability: lnlike_marg_poisson_lognormal_error}
+
+
+Logger:
+
+  # Redirectory of specific messages according to tags
+
+  prefix : "data_gambit/ColliderBit_eventloop/logs/"
+  redirection:
+    [Debug] : "debug.log"
+    [Default] : "default.log"
+    [Error] : "errors.log"
+    [Warning] : "warnings.log"
+    [Core,Error] : "core_errors.log"
+    [Core,Error,Fatal] : "fatal_core_errors.log"
+    [Dependency Resolver] : "dependency_resolver.log"
+    [ColliderBit] : "ColliderBit.log"
+
+KeyValues:
+  default_output_path: "data_gambit/ColliderBit_eventloop"
+  likelihood:
+    model_invalid_for_lnlike_below: -1e11
