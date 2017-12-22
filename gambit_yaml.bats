@@ -41,6 +41,14 @@ teardown() {
   [ $status = 0 ]
 }
 
+@test "ColliderBit_eventloop with gambit" {
+  local test=ColliderBit_eventloop
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
 @test "DecayBit_MSSM20 with gambit" {
   local test=DecayBit_MSSM20_BATS
   local yaml=./yaml/$test.yaml
