@@ -1,26 +1,25 @@
 """
-Modified PyYAML that supports !import keyword
-=============================================
-
-Also supports lists as YAML keys.
+Modified PyYAML that supports !import keyword and lists as keys
+===============================================================
 """
 
 import os
 import yaml
 
 
-IMPORT_TAG = "!import"
+IMPORT_TAG = '!import'
+SEQ_TAG = 'tag:yaml.org,2002:seq'
 
 
 class ImportLoader(yaml.Loader):
     """
-    Override default loader to support inclusion of YAML files.
-
-    YAML file paths should be relative to original stream.
-
-    https://stackoverflow.com/a/9577670/2855071
+    Override default loader to support inclusion of YAML files and permit lists
+    as YAML keys.
     """
     def __init__(self, stream):
+        """
+        Obtain path to stream, if possible.
+        """
         try:
             self._root = os.path.split(stream.name)[0]
         except AttributeError:
@@ -29,7 +28,9 @@ class ImportLoader(yaml.Loader):
 
     def import_(self, node):
         """
-        :param node: YAML file to be importd relative to original stream
+        Import YAML file via a keyword (see
+        https://stackoverflow.com/a/9577670/2855071)
+
         :returns: YAML file for inclusion
         :rtype: dict
         """
@@ -40,14 +41,13 @@ class ImportLoader(yaml.Loader):
 
     def construct_tuple(self, node):
         """
-        Permit lists as YAML keys.
-        
-        https://gist.github.com/miracle2k/3184458#file-tuple-py
+        Permit lists as YAML keys (see
+        https://gist.github.com/miracle2k/3184458#file-tuple-py).
         """
         return tuple(ImportLoader.construct_sequence(self, node))
 
 
-ImportLoader.add_constructor(u'tag:yaml.org,2002:seq', ImportLoader.construct_tuple)
+ImportLoader.add_constructor(SEQ_TAG, ImportLoader.construct_tuple)
 ImportLoader.add_constructor(IMPORT_TAG, ImportLoader.import_)
 
 
