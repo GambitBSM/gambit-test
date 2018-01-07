@@ -25,6 +25,14 @@ teardown() {
 
 # BAT framework tests - make information as descriptive as possible.
 
+@test "FlexibleSUSY_MSSM11 with gambit" {
+  local test=MSSM11_test
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
+  [ $status = 0 ]
+}
+
 @test "DarkBit_lnL_oh2 with gambit" {
   local test=DarkBit_lnL_oh2
   local yaml=./yaml/$test.yaml
