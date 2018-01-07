@@ -37,7 +37,7 @@ teardown() {
   local test=DarkBit_lnL_DD
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -45,7 +45,7 @@ teardown() {
   local test=DarkBit_lnL_IceCube
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -53,7 +53,7 @@ teardown() {
   local test=DarkBit_lnL_GammaRays
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
