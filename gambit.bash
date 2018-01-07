@@ -11,6 +11,7 @@ gambit_id_ascii_files() {
   local gambit_result=$2
   local gambit_expected=$3
   local rtol=$4
+  local atol=$5
   
   # Safely delete an existing gambit result
 
@@ -20,5 +21,5 @@ gambit_id_ascii_files() {
         
   "$GAMBIT"/gambit -rf "$yaml"
   
-  id_ascii_files "$gambit_result" "$gambit_expected" "$rtol"
+  id_ascii_files "$gambit_result" "$gambit_expected" "$rtol" "$atol"
 }

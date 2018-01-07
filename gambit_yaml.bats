@@ -29,7 +29,7 @@ teardown() {
   local test=DarkBit_lnL_oh2
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -37,7 +37,7 @@ teardown() {
   local test=ColliderBit_LEPSUSY
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -45,7 +45,7 @@ teardown() {
   local test=ColliderBit_eventloop
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -53,7 +53,7 @@ teardown() {
   local test=DecayBit_MSSM20_BATS
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -61,7 +61,7 @@ teardown() {
   local test=PrecisionBit_MSSM20_BATS
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -70,7 +70,7 @@ teardown() {
   local test=DarkBit_lnL_oh2
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ ! -e Key.dat ]
 }
 
@@ -80,7 +80,7 @@ teardown() {
   local test=ScannerBit_multinest
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 
@@ -88,7 +88,7 @@ teardown() {
   local test=ScannerBit_diver
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
-  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
   [ $status = 0 ]
 }
 

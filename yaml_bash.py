@@ -8,7 +8,9 @@ from import_yaml import load
 
 
 BLOCK = 'Test'
-KEYS = ('gambit', 'expected', 'rtol', 'email')
+COMPULSORY = ('gambit', 'expected', 'email')
+OPTIONAL = (('rtol', 1E10), ('atol', 1E10))
+BASH = '{}_{}="{}"'
 
 
 def yaml_to_bash(yaml_name):
@@ -26,10 +28,12 @@ def yaml_to_bash(yaml_name):
         data = load(yaml_file)
 
     try:
-        bash = ['{}_{}="{}"'.format(BLOCK, k, data[BLOCK][k]) for k in KEYS]
+        bash = [BASH.format(BLOCK, k, data[BLOCK][k]) for k in COMPULSORY]
     except (TypeError, KeyError):
         error = "YAML '{}' didn't contain '{}' block with {} keys"
-        raise RuntimeError(error.format(yaml_name, BLOCK, KEYS))
+        raise RuntimeError(error.format(yaml_name, BLOCK, COMPULSORY))
+
+    bash += [BASH.format(BLOCK, k, data[BLOCK].get(k, d)) for k, d in OPTIONAL]
 
     bash = ";\n".join(bash)
     return bash
