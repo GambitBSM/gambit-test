@@ -77,6 +77,8 @@ Priors:
 Printer:
 
   printer: ascii
+  options:
+    output_file: "results.txt"
 
 Test:
   gambit: ./data_gambit/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum.slha2
