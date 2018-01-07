@@ -42,7 +42,7 @@ Add a test to `gambit_yaml.bats` by coping this template:
       local test=ScannerBit_multinest
       local yaml=./yaml/$test.yaml
       source_yaml "$yaml"
-      run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+      run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
       [ $status = 0 ]
     
 and changing `ScannerBit_multinest with gambit` and `ScannerBit_multinest` to the description and
