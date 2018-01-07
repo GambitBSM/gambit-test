@@ -305,7 +305,7 @@ Rules:
   # Tell all functions that are able to dump SLHA files to do so.
   - options:
       drop_SLHA_file: true
-      SLHA_output_filename: "data_gambit/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum.slha2"
+      SLHA_output_filename: "data_gambit/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum"
   # Globally permit maximal mixing between gauge and family eigenstates
   - options:
       gauge_mixing_tolerance: 0.5
