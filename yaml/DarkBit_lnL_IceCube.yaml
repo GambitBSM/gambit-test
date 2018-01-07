@@ -3,7 +3,7 @@
 # Written by J. Cornell.
 
 Test:
-  gambit: ./data_gambit/DarkBit_lnL_IceCube/samples/DarkBit_lnL_IceCube.dat_0
+  gambit: ./data_gambit/DarkBit_lnL_IceCube/samples/DarkBit_lnL_IceCube.dat
   expected: ./data_expected/DarkBit_lnL_IceCube.expected
   rtol: 1E-1
   email: cornellj@physics.mcgill.ca
