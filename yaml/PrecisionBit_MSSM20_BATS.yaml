@@ -8,7 +8,7 @@
 
 Test:
   gambit: ./data_gambit/PrecisionBit_MSSM20/samples/results.txt
-  expected: ./data_expected/PrecisionBit_MSSM20/samples/results.txt_0.expected
+  expected: ./data_expected/PrecisionBit_MSSM20.expected
   rtol: 1E-1
   email: p.scott@imperial.ac.uk
 
