@@ -33,6 +33,30 @@ teardown() {
   [ $status = 0 ]
 }
 
+@test "DarkBit_lnL_DD with gambit" {
+  local test=DarkBit_lnL_DD
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
+@test "DarkBit_lnL_IceCube with gambit" {
+  local test=DarkBit_lnL_IceCube
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
+@test "DarkBit_lnL_GammaRays with gambit" {
+  local test=DarkBit_lnL_GammaRays
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol"
+  [ $status = 0 ]
+}
+
 @test "ColliderBit_LEPSUSY with gambit" {
   local test=ColliderBit_LEPSUSY
   local yaml=./yaml/$test.yaml

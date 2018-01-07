@@ -1,12 +1,12 @@
-# BATS test for GAMBIT -> DarkBit -> lnL_oh2.
+# BATS test for GAMBIT -> DarkBit -> lnL_DD.
 #
-# Written by A. Fowlie and J. Cornell
+# Written by J. Cornell.
 
 Test:
-  gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat_0
-  expected: ./data_expected/DarkBit_lnL_oh2.expected
+  gambit: ./data_gambit/DarkBit_lnL_DD/samples/DarkBit_lnL_DD.dat_0
+  expected: ./data_expected/DarkBit_lnL_DD.expected
   rtol: 1E-1
-  email: andrew.fowlie@monash.edu cornellj@physics.mcgill.ca
+  email: cornellj@physics.mcgill.ca
 
 Parameters:
 
@@ -50,10 +50,29 @@ Parameters:
     alpha1  :  0       # first Majorana CP-violating phase
     alpha2  :  0       # second CP-violating Majorana phase
 
+  nuclear_params_sigmas_sigmal:
+    sigmas: 43
+    sigmal: 58
+    deltau: 0.842
+    deltad: -0.427
+    deltas: -0.085
+
+  Halo_gNFW_rho0:
+    rho0: 0.4
+    v0: 235.0
+    vesc: 550.0
+    vrot: 235.0
+    rs: 20.0
+    r_sun: 8.5
+    alpha: 1
+    beta: 3
+    gamma: 1
+
+
 Printer:
   printer: ascii
   options:
-    output_file: "DarkBit_lnL_oh2.dat"
+    output_file: "DarkBit_lnL_DD.dat"
 
 Scanner:
   use_scanner: random
@@ -66,8 +85,39 @@ Scanner:
       like:  LogLike
 
 ObsLikes:
-  - capability: lnL_oh2
-    purpose: LogLike
+  # Direct detection likelihoods
+  - capability: XENON100_2012_LogLikelihood
+    purpose:    LogLike
+
+  - capability: XENON1T_2017_LogLikelihood
+    purpose:    LogLike
+
+  - capability: LUX_2013_LogLikelihood
+    purpose:    LogLike
+
+  - capability: LUX_2015_LogLikelihood
+    purpose:    LogLike
+
+  - capability: LUX_2016_LogLikelihood
+    purpose:    LogLike
+
+  - capability: PandaX_2016_LogLikelihood
+    purpose:    LogLike
+
+  - capability: SuperCDMS_2014_LogLikelihood
+    purpose:    LogLike
+
+  - capability: SIMPLE_2014_LogLikelihood
+    purpose:    LogLike
+
+  - capability: PICO_2L_LogLikelihood
+    purpose:    LogLike
+
+  - capability: PICO_60_F_LogLikelihood
+    purpose:    LogLike
+
+  - capability: PICO_60_2017_LogLikelihood
+    purpose:    LogLike
 
 Rules:
   # Choose to use functions that get Higgs decays from SUSY-HIT, and t decays 
@@ -92,19 +142,33 @@ Rules:
   # Choose to get decays from DecayBit proper, not from an SLHA file.
   - capability: decay_rates
     function: all_decays
-
-  # Choose to implement the relic density likelihood as an upper bound, not a detection
-  - capability: lnL_oh2
-    function: lnL_oh2_upperlimit
-
-  # Use the DarkBit native calculator for the relic density
-  - capability: RD_oh2
-    function: RD_oh2_general
-    options:
-      fast: 1
       
-  # Choose where to get the precision spectrum from
-  
+  # Choose to rescale signals in direct and indirect detection by the relic density fraction
+  - capability: RD_fraction
+    #function: RD_fraction_rescaled # Rescale the local DM density
+    #options:
+    #   oh2_obs: 0.1188
+    #function: RD_fraction_leq_one # Rescale the local DM density if the calculated relic density is less than the observed
+    #options:
+    #   oh2_obs: 0.1188
+    function: RD_fraction_one # Do not rescale the local DM density
+
+  # Use DarkSUSY or MicrOmegas for calculating direct detection couplings
+  - capability: DD_couplings
+    function: DD_couplings_DarkSUSY
+    options: 
+      # If the below is true, 1 loop effects as discuseed in 
+      # Drees Nojiri Phys.Rev. D48 (1993) 3483 are included
+      loop: true 
+      # If the below is false, the squark propagator is approximated as 1/m_sq^2
+      # (automatically set to true if loop = true)
+      # pole: false
+    #function: DD_couplings_MicrOmegas
+    #options:
+    #  # If the below is true, the box diagram for gluon-neutralino scattering as 
+    #  # discussed in arXiv:0803.2360 is included in the calculation
+    #  loop: box
+
   - capability: MSSM_spectrum
     function: make_MSSM_precision_spectrum_none
     module: PrecisionBit
@@ -114,7 +178,7 @@ Rules:
     module: SpecBit
    
 KeyValues:
-  default_output_path: "data_gambit/DarkBit_lnL_oh2"
+  default_output_path: "data_gambit/DarkBit_lnL_DD"
   likelihood:
     model_invalid_for_lnlike_below: -1e6
 
