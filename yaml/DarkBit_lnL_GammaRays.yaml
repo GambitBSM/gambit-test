@@ -1,0 +1,160 @@
+# BATS test for GAMBIT -> DarkBit -> lnL for Gamma Rays.
+#
+# Written by J. Cornell.
+
+Test:
+  gambit: ./data_gambit/DarkBit_lnL_GammaRays/samples/DarkBit_lnL_GammaRays.dat_0
+  expected: ./data_expected/DarkBit_lnL_GammaRays.expected
+  rtol: 1E-1
+  email: cornellj@physics.mcgill.ca
+
+Parameters:
+
+  MSSM7atQ:
+    Qin: 1000.0
+    SignMu: 1
+    Ad_3: 1000
+    Au_3: 2680
+    M2: 690
+    TanBeta: 23
+    mHd2: 9.86e7
+    mHu2: 1.4e4
+    mf2: 3.8e6
+
+  # SM parameters.
+  StandardModel_SLHA2:
+    alphainv:  1.27940010E+02 # alpha^{-1}(mZ)^MSbar *
+    GF      :  1.16637870E-05 # G_Fermi **
+    alphaS  :  1.18500000E-01 # alpha_s(mZ)^MSbar ^
+    mZ      :  9.11876000E+01 # mZ(pole) !
+    mBmB    :  4.18000000E+00 # mb(mb)^MSbar &
+    mT      :  1.73340000E+02 # mtop(pole) $
+    mTau    :  1.77682000E+00 # mtau(pole) §
+    mNu3    :               0 # mnu3(pole)
+    mE      :  5.10998928E-04 # melectron(pole) § **
+    mNu1    :               0 # mnu1(pole)
+    mMu     :  1.05658372E-01 # mmuon(pole) §
+    mNu2    :               0 # mnu2(pole)
+    mD      :  4.80000000E-03 # md(2 GeV)^MSbar @
+    mU      :  2.30000000E-03 # mu(2 GeV)^MSbar @
+    mS      :  9.50000000E-02 # ms(2 GeV)^MSbar @
+    mCmC    :  1.27500000E+00 # mc(mc)^MSbar %
+    CKM_lambda  :  0.22537
+    CKM_A       :  0.814
+    CKM_rhobar  :  0.117
+    CKM_etabar  :  0.353
+    theta12 :  0.58376 # solar angle
+    theta23 :  0.76958 # atmospheric mixing angle
+    theta13 :  0.15495 #
+    delta13 :  0       # Dirac CP-violating phase
+    alpha1  :  0       # first Majorana CP-violating phase
+    alpha2  :  0       # second CP-violating Majorana phase
+
+  Halo_gNFW_rho0:
+    rho0: 0.4
+    v0: 235.0
+    vesc: 550.0
+    vrot: 235.0
+    rs: 20.0
+    r_sun: 8.5
+    alpha: 1
+    beta: 3
+    gamma: 1
+
+Printer:
+  printer: ascii
+  options:
+    output_file: "DarkBit_lnL_GammaRays.dat"
+
+Scanner:
+  use_scanner: random
+  
+  scanners:
+
+    random:
+      plugin: random
+      point_number: 1
+      like:  LogLike
+
+ObsLikes:
+  # Calculate gamma ray likelihoods:
+  - capability: lnL_FermiLATdwarfs
+    purpose:    LogLike
+
+  - capability: lnL_FermiGC
+    purpose:    LogLike
+
+  - capability: lnL_HESSGC
+    purpose:    LogLike
+
+  - capability: lnL_CTAGC
+    purpose:    LogLike
+
+Rules:
+  # Choose to use functions that get Higgs decays from SUSY-HIT, and t decays 
+  # from DecayBit native implementation (instead of FeynHiggs)
+  - capability: Reference_SM_Higgs_decay_rates
+    function: Ref_SM_Higgs_decays_table
+  - capability: Reference_SM_other_Higgs_decay_rates
+    function: Ref_SM_other_Higgs_decays_table
+  - capability: Reference_SM_A0_decay_rates
+    function: Ref_SM_A0_decays_table
+  - capability: Higgs_decay_rates
+    function: MSSM_h0_1_decays
+  - capability: h0_2_decay_rates
+    function: h0_2_decays
+  - capability: A0_decay_rates
+    function: A0_decays
+  - capability: H_plus_decay_rates
+    function: H_plus_decays
+  - capability: t_decay_rates
+    function: t_decays
+
+  # Choose to get decays from DecayBit proper, not from an SLHA file.
+  - capability: decay_rates
+    function: all_decays
+
+  # Choose to rescale signals in direct and indirect detection by the relic density fraction
+  - capability: RD_fraction
+    #function: RD_fraction_rescaled # Rescale the local DM density
+    #options:
+    #   oh2_obs: 0.1188
+    #function: RD_fraction_leq_one # Rescale the local DM density if the calculated relic density is less than the observed
+    #options:
+    #   oh2_obs: 0.1188
+    function: RD_fraction_one # Do not rescale the local DM density
+
+  # Choose to use DarkSUSY yield tables for indirect detection
+  - capability: SimYieldTable
+    function: SimYieldTable_DarkSUSY
+    options:
+       allow_yield_extrapolation:  false # Allow extrapolation beyond masses simulated in tables
+
+  # Gamma-ray likelihoods (See DarkBit paper for details on version options)
+  -  function: lnL_FermiLATdwarfs_gamLike
+     options:
+        version: "pass8" # Other option is pass7
+
+  - function: lnL_FermiFC_gamLike
+    options:
+       version: "externalJ" # Other options are fixedJ, margJ, margJ_HEP and externalJ
+
+  - function: lnL_HESSGC_gamLike
+    options:
+       version: "spectral_externalJ"
+       # Other options are integral_fixedJ, integral_externalJ, and spectral_fixedJ
+      
+  - capability: MSSM_spectrum
+    function: make_MSSM_precision_spectrum_none
+    module: PrecisionBit
+
+  - capability: unimproved_MSSM_spectrum
+    function: get_MSSMatQ_spectrum_FS
+    module: SpecBit
+   
+KeyValues:
+  default_output_path: "data_gambit/DarkBit_lnL_GammaRays"
+  likelihood:
+    model_invalid_for_lnlike_below: -1e6
+
+  debug: true
