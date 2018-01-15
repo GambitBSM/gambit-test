@@ -58,6 +58,7 @@ Test:
   gambit: ./data_gambit/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum.slha2
   expected: ./data_expected/SpecBit_FS_MSSM11_mA.expected
   rtol: 1E-4
+  atol: 1E-4
   email: peter.athron@coepp.org.au
 
     
