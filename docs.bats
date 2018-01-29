@@ -4,9 +4,19 @@
 #
 # Written by A. Fowlie.
 
+load funcs
+
+setup() {
+  :
+}
+
+# Echo information on teardown, if error
+teardown() {
+  error "$output"
+}
 
 @test "Check for capabilities that are missing descriptions" {
-  python docs.py
+  run python docs.py
   [ $status = 0 ]
 }
 
