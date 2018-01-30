@@ -15,7 +15,7 @@ teardown() {
   error "$output"
 }
 
-@test "Check for capabilities that are missing descriptions" {
+@test "check for capabilities that are missing descriptions" {
   run python docs.py
   [ $status = 0 ]
 }
