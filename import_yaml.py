@@ -1,6 +1,8 @@
 """
-Modified PyYAML that supports !import keyword and lists as keys
-===============================================================
+Modified PyYAML
+===============
+
+Supports !import keyword, lists as keys and checks for duplicate keys.
 """
 
 import os
@@ -24,6 +26,7 @@ class ImportLoader(yaml.Loader):
             self._root = os.path.split(stream.name)[0]
         except AttributeError:
             self._root = os.getcwd()
+        self.duplicates = []
         super(ImportLoader, self).__init__(stream)
 
     def import_(self, node):
@@ -46,7 +49,23 @@ class ImportLoader(yaml.Loader):
         """
         return tuple(ImportLoader.construct_sequence(self, node))
 
+    def note_duplicates(self, node, deep=False):
+        """
+        Raise error if duplicate keys (see
+        https://gist.github.com/pypt/94d747fe5180851196eb).
+        """
+        mapping = {}
 
+        for key_node, value_node in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            value = self.construct_object(value_node, deep=deep)
+            if key in mapping:
+                self.duplicates.append(key)
+            mapping[key] = value
+
+        return self.construct_mapping(node, deep)
+
+ImportLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, ImportLoader.note_duplicates)
 ImportLoader.add_constructor(SEQ_TAG, ImportLoader.construct_tuple)
 ImportLoader.add_constructor(IMPORT_TAG, ImportLoader.import_)
 
@@ -60,3 +79,13 @@ def load(stream):
     :rtype: dict
     """
     return yaml.load(stream, ImportLoader)
+
+def duplicates(stream):
+    """
+    """
+    loader = ImportLoader(stream)
+    try:
+        loader.get_single_data()
+        return loader.duplicates
+    finally:
+        loader.dispose()

@@ -16,12 +16,21 @@ teardown() {
 }
 
 @test "check for capabilities that are missing descriptions" {
-  run python docs.py capabilities
+  run python docs.py capabilities missing
   [ $status = 0 ]
 }
 
 @test "check for models that are missing descriptions" {
-  run python docs.py models
+  run python docs.py models missing
   [ $status = 0 ]
 }
 
+@test "check for capabilities that are duplicated in docs" {
+  run python docs.py capabilities duplicates
+  [ $status = 0 ]
+}
+
+@test "check for models that are duplicated in docs" {
+  run python docs.py models duplicates
+  [ $status = 0 ]
+}

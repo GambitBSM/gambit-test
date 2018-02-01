@@ -3,7 +3,7 @@ Check descriptions
 ==================
 """
 
-from import_yaml import load
+from import_yaml import load, duplicates
 
 import sys
 import os
@@ -30,6 +30,15 @@ def filter_(lines, start, end):
             break
         elif yield_:
             yield line
+
+
+def dupes(command):
+    """
+    """
+    file_name = "{}/config/{}.dat".format(GAMBIT, command)
+
+    with open(file_name, 'r') as yaml_file:
+        return duplicates(yaml_file)
 
 def docs(command):
     """
@@ -60,10 +69,20 @@ def missing(command):
 
 if __name__ == '__main__':
 
-    assert len(sys.argv) == 2
+    assert len(sys.argv) == 3
     command = sys.argv[1]
+    mode = sys.argv[2]
     assert command in ['capabilities', 'models']
+    assert mode in ['missing', 'duplicates']
 
-    missing_ = missing(command)
-    message = "The {}: {} were missing descriptions"
-    assert not missing_, message.format(command, missing_)
+    if mode == 'missing':
+
+        missing_ = missing(command)
+        message = "The {}: {} were missing descriptions"
+        assert not missing_, message.format(command, missing_)
+
+    else:
+
+        duplicates_ = dupes(command)
+        message = "The {}: {} were duplicated"
+        assert not duplicates_, message.format(command, duplicates_)
