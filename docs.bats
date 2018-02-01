@@ -16,7 +16,12 @@ teardown() {
 }
 
 @test "check for capabilities that are missing descriptions" {
-  run python docs.py
+  run python docs.py capabilities
+  [ $status = 0 ]
+}
+
+@test "check for models that are missing descriptions" {
+  run python docs.py models
   [ $status = 0 ]
 }
 
