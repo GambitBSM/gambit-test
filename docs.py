@@ -65,6 +65,11 @@ def missing(command):
     """
     """
     return call(command) - docs(command)
+    
+def extra(command):
+    """
+    """
+    return docs(command) - call(command)
 
 
 if __name__ == '__main__':
@@ -73,7 +78,7 @@ if __name__ == '__main__':
     command = sys.argv[1]
     mode = sys.argv[2]
     assert command in ['capabilities', 'models']
-    assert mode in ['missing', 'duplicates']
+    assert mode in ['missing', 'duplicates', 'extra']
 
     if mode == 'missing':
 
@@ -81,6 +86,12 @@ if __name__ == '__main__':
         message = "The {}: {} were missing descriptions"
         assert not missing_, message.format(command, missing_)
 
+    elif mode == 'extra':
+    
+        extra_ = extra(command)
+        message = "The {}: {} are extra"
+        assert not extra_, message.format(command, extra_)
+    
     else:
 
         duplicates_ = dupes(command)
