@@ -35,7 +35,7 @@ teardown() {
   [ $status = 0 ]
 }
 
-@test "check for capabilities that extra in docs" {
+@test "check for capabilities that are extra in docs" {
   run python docs.py capabilities extra
   [ $status = 0 ]
 }
