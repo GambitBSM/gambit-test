@@ -17,6 +17,7 @@ setup() {
 teardown() {
   error "$output"
   rm -rf ./runs  # This shouldn't be neccessary
+  rm -rf $GAMBIT/runs  # This shouldn't be neccessary
 }
 
 # BAT framework tests - make information as descriptive as possible.
