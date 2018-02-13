@@ -13,6 +13,10 @@ from subprocess import check_output
 GAMBIT = os.environ["GAMBIT"]
 START = dict(models='MODEL', capabilities='CAPABILITIES')
 END = 'Calling MPI_Finalize'
+EXTRA = set(['DetAnalysisNumbers', 
+             'DetectorSim',
+             'ReconstructedEvent',
+             'DetAnalysisContainer'])
 
 
 def filter_(lines, start, end):
@@ -89,8 +93,8 @@ if __name__ == '__main__':
     elif mode == 'extra':
     
         extra_ = extra(command)
-        message = "The {}: {} are extra"
-        assert not extra_, message.format(command, extra_)
+        message = "The {}: {} are extra"   
+        assert not extra_ or extra_ == EXTRA, message.format(command, extra_)
     
     else:
 
