@@ -29,8 +29,8 @@ teardown() {
   )
   cat "$GAMBIT"/LUX_2016_SD_table.dat \
       "$GAMBIT"/LUX_2016_SI_table.dat \
-      "$GAMBIT"/PandaX_2016_SD_table.dat \
-      "$GAMBIT"/PandaX_2016_SI_table.dat \
+      "$GAMBIT"/PandaX_2017_SD_table.dat \
+      "$GAMBIT"/PandaX_2017_SI_table.dat \
       "$GAMBIT"/PICO_60_2017_SD_table.dat \
       "$GAMBIT"/PICO_60_2017_SI_table.dat \
       "$GAMBIT"/XENON1T_2017_SD_table.dat \
@@ -38,8 +38,8 @@ teardown() {
 
   rm -f "$GAMBIT"/LUX_2016_SD_table.dat \
         "$GAMBIT"/LUX_2016_SI_table.dat \
-        "$GAMBIT"/PandaX_2016_SD_table.dat \
-        "$GAMBIT"/PandaX_2016_SI_table.dat \
+        "$GAMBIT"/PandaX_2017_SD_table.dat \
+        "$GAMBIT"/PandaX_2017_SI_table.dat \
         "$GAMBIT"/PICO_60_2017_SD_table.dat \
         "$GAMBIT"/PICO_60_2017_SI_table.dat \
         "$GAMBIT"/XENON1T_2017_SD_table.dat \
