@@ -106,8 +106,6 @@ teardown() {
   [ ! -e Key.dat ]
 }
 
-# ScannerBit tests
-
 @test "ScannerBit_multinest with gambit" {
   local test=ScannerBit_multinest
   local yaml=./yaml/$test.yaml
@@ -118,6 +116,14 @@ teardown() {
 
 @test "ScannerBit_diver with gambit" {
   local test=ScannerBit_diver
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
+  [ $status = 0 ]
+}
+
+@test "DecayBit H and Z invisible decays with gambit" {
+  local test=invisible_decays_H_Z
   local yaml=./yaml/$test.yaml
   source_yaml "$yaml"
   run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
