@@ -9,7 +9,7 @@ Test:
   email: andrew.fowlie@monash.edu
 
 Parameters:
-  StandardModel_SLHA2: !import include/StandardModel_SLHA2_defaults.yaml
+  StandardModel_SLHA2: !import StandardModel_SLHA2_defaults.yaml
   CMSSM:
     M0:      500.0
     M12:     30.0
