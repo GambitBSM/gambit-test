@@ -1,0 +1,67 @@
+# Tests H and Z decays in the MSSM
+#
+# Written by A. Fowlie
+
+Test:
+  gambit: ./data_gambit/invisible_decays_H_Z/samples/invisible_decays_H_Z.dat
+  expected: ./data_expected/invisible_decays_H_Z.expected
+  rtol: 1E-3
+  email: andrew.fowlie@monash.edu
+
+Parameters:
+  StandardModel_SLHA2: !import StandardModel_SLHA2_defaults.yaml
+  CMSSM:
+    M0:      500.0
+    M12:     30.0
+    A0:       0.0
+    TanBeta: 15.0
+    SignMu:   1
+
+Printer:
+  printer: ascii
+  options:
+    output_file: "invisible_decays_H_Z.dat"
+
+Scanner:
+  use_scanner: random
+  scanners:
+    random:
+      plugin: random
+      output_file: output
+      like: LogLike
+      point_number: 1
+      files:
+        output_file: "invisible_decays_H_Z.random.dat"
+
+ObsLikes:
+
+   - purpose: LogLike
+     capability: lnL_Z_inv
+        
+   - purpose: Observable
+     capability: inv_Higgs_BF
+    
+   - purpose: LogLike
+     capability: lnL_Higgs_invWidth
+     
+Rules:
+  
+  - capability: MSSM_spectrum
+    function: make_MSSM_precision_spectrum_4H_W
+    module: PrecisionBit
+
+  - capability: prec_mh
+    function: FH_HiggsMass
+    module: SpecBit
+    
+  - capability: unimproved_MSSM_spectrum
+    function: get_CMSSM_spectrum_FS
+    module: SpecBit
+
+  - options:
+      BR_h_inv_chi2_data_file: ./DecayBit/data/CMS-PAS-HIG-17-023_Figure_7-b.dat
+
+KeyValues:
+  default_output_path: "data_gambit/invisible_decays_H_Z"
+  likelihood:
+    model_invalid_for_lnlike_below: -1e11
