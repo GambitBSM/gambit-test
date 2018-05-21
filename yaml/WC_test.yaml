@@ -16,10 +16,8 @@ Test:
 Parameters:
 
   StandardModel_SLHA2:
-    alphaS:
-      range: [0.1167, 0.1203]   # alpha_s(mZ)^MSbar
-    mBmB:
-      range: [4.09, 4.27]       # mb(mb)^MSbar
+    alphaS: 1.18100000E-01      # alpha_s(mZ)^MSbar
+    mBmB: 4.18000000E+00        # mb(mb)^MSbar
     alphainv  :  1.27940010E+02 # alpha^{-1}(mZ)^MSbar
     mT        :  1.73340000E+02 # mtop(pole)
     GF        :  1.16637870E-05 # G_Fermi
@@ -49,19 +47,16 @@ Parameters:
     mH: 125.09
 
   WC:
-    Re_DeltaC7: 
-      range: [-0.1, 0.1]
-    Im_DeltaC7: 0
-    Re_DeltaC9:
-       range: [-3, 1]
-    Im_DeltaC9:  0
-    Re_DeltaC10:
-       range: [-3, 3]
-    Im_DeltaC10:  0
-    Re_DeltaCQ1:  0
-    Im_DeltaCQ1:  0
-    Re_DeltaCQ2:  0
-    Im_DeltaCQ2:  0
+    Re_DeltaC7: 0.3
+    Im_DeltaC7: -0.2
+    Re_DeltaC9: 0.5
+    Im_DeltaC9: -0.6
+    Re_DeltaC10: 0.1
+    Im_DeltaC10: -0.7
+    Re_DeltaCQ1: 0.8
+    Im_DeltaCQ1: -0.4
+    Re_DeltaCQ2: 0.8
+    Im_DeltaCQ2: -0.2
 
 
 Priors:
