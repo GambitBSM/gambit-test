@@ -35,15 +35,21 @@ Scanner:
 
 ObsLikes:
 
+   - purpose: Observable
+     capability: Z_gamma_nu
+
+   - purpose: Observable
+     capability: Z_gamma_chi_0
+
    - purpose: LogLike
      capability: lnL_Z_inv
-        
+
    - purpose: Observable
      capability: inv_Higgs_BF
-    
+
    - purpose: LogLike
      capability: lnL_Higgs_invWidth
-     
+
 Rules:
   
   - capability: MSSM_spectrum
@@ -53,7 +59,7 @@ Rules:
   - capability: prec_mh
     function: FH_HiggsMass
     module: SpecBit
-    
+
   - capability: unimproved_MSSM_spectrum
     function: get_CMSSM_spectrum_FS
     module: SpecBit
