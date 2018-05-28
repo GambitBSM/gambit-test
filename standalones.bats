@@ -51,7 +51,7 @@ teardown() {
 }
 
 @test "SM_Z" {
-  g++ -std=c++11 -o SM_Z "$GAMBIT"/DecayBit/examples/SM_Z.cpp -I"$GAMBIT"/DecayBit/include/gambit/DecayBit/
+  g++ -std=c++11 -o SM_Z ./examples/SM_Z.cpp -I"$GAMBIT"/DecayBit/include/gambit/DecayBit/
   rm -f data_gambit/SM_Z.dat
   ./SM_Z > data_gambit/SM_Z.dat
   run id_ascii_files data_gambit/SM_Z.dat data_expected/SM_Z.dat 0.01 0.01
@@ -59,9 +59,17 @@ teardown() {
 }
 
 @test "MSSM_H" {
-  g++ -std=c++11 -o MSSM_H "$GAMBIT"/DecayBit/examples/MSSM_H.cpp -I"$GAMBIT"/DecayBit/include/gambit/DecayBit/
+  g++ -std=c++11 -o MSSM_H ./examples/MSSM_H.cpp -I"$GAMBIT"/DecayBit/include/gambit/DecayBit/
   rm -f data_gambit/MSSM_H.dat
   ./MSSM_H > data_gambit/MSSM_H.dat
   run id_ascii_files data_gambit/MSSM_H.dat data_expected/MSSM_H.dat 0.01 0.01
+  [ $status = 0 ]
+}
+
+@test "MSSM_Z" {
+  g++ -std=c++11 -o MSSM_Z ./examples/MSSM_Z.cpp -I"$GAMBIT"/DecayBit/include/gambit/DecayBit/
+  rm -f data_gambit/MSSM_Z.dat
+  ./MSSM_Z > data_gambit/MSSM_Z.dat
+  run id_ascii_files data_gambit/MSSM_Z.dat data_expected/MSSM_Z.dat 0.01 0.01
   [ $status = 0 ]
 }
