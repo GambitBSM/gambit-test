@@ -9,6 +9,7 @@ load funcs
 setup() {
   rm -f SM_Z
   rm -f MSSM_H
+  rm -f MSSM_Z
 }
 
 # Echo information on teardown, if error
