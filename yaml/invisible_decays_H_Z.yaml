@@ -53,19 +53,18 @@ ObsLikes:
 Rules:
   
   - capability: MSSM_spectrum
-    function: make_MSSM_precision_spectrum_4H_W
+    function: make_MSSM_precision_spectrum_none
     module: PrecisionBit
-
-  - capability: prec_mh
-    function: FH_HiggsMass
-    module: SpecBit
 
   - capability: unimproved_MSSM_spectrum
     function: get_CMSSM_spectrum_FS
     module: SpecBit
 
   - options:
-      BR_h_inv_chi2_data_file: ./DecayBit/data/CMS-PAS-HIG-17-023_Figure_7-b.dat
+      BR_h_inv_chi2_data_file:
+        ./DecayBit/data/CMS-PAS-HIG-17-023_Figure_7-b.dat
+      override_FS_pole_masses:
+        h0_1: 125.
 
 KeyValues:
   default_output_path: "data_gambit/invisible_decays_H_Z"
