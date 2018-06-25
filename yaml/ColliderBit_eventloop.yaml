@@ -3,13 +3,13 @@
 # Tests ColliderBit LHC likelihood for a single CMSSM point
 #
 # Anders Kvellestad <anders.kvellestad@fys.uio.no>
-# May 2018
+# December 2017
 
-Test:
-  gambit: ./data_gambit/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
-  expected: ./data_expected/ColliderBit_eventloop.expected
-  rtol: 1E-1
-  email: anders.kvellestad@fys.uio.no
+# Test:
+#   gambit: ./data_gambit/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
+#   expected: ./data_expected/ColliderBit_eventloop.expected
+#   rtol: 1E-1
+#   email: anders.kvellestad@fys.uio.no
 
 Parameters:
   StandardModel_SLHA2:
@@ -56,9 +56,10 @@ Parameters:
     SignMu:   1
 
 Printer:
-  printer: ascii
-  options:
-    output_file: "ColliderBit_eventloop.dat"
+  printer: cout
+  # printer: ascii
+  # options:
+  #   output_file: "ColliderBit_eventloop.dat"
 
 Scanner:
   use_scanner: random
@@ -76,6 +77,22 @@ ObsLikes:
     # Test the LHC likelihood
     - purpose:    LogLike
       capability: LHC_Combined_LogLike
+
+    # Observables (not included in likelihood)
+    - purpose:    likelihood_details
+      capability: LHC_LogLike_per_analysis
+
+    - purpose:    Observable
+      capability: LHC_signals
+
+    - purpose:    likelihood_details
+      capability: LHC_LogLike_per_SR
+
+    - purpose:    likelihood_details
+      capability: LHC_LogLike_SR_indices
+
+    - purpose:    Observable
+      capability: LHCEventLoopInfo
 
 
 Rules:
@@ -159,12 +176,13 @@ Rules:
   # Choose statistical settings for Monte Carlo event generator
   - capability: MC_ConvergenceSettings
     options:
-      min_nEvents: [20000, 20000]
-      max_nEvents: [50000, 50000]
-      events_between_convergence_checks: [20000, 20000]
-      target_fractional_uncert: [0.3, 0.3]
+      min_nEvents: [50000, 50000]
+      max_nEvents: [100000, 100000]
+      events_between_convergence_checks: [25000, 25000]
+      target_fractional_uncert: [0.1, 0.1]  # [0.3, 0.3]
       halt_when_systematic_dominated: true
-      all_SR_must_converge: false
+      all_analyses_must_converge: true
+      all_SR_must_converge: true
 
   # Choose which getPythia to use
   # For a scan, we use the one that does not expect an input SLHA file (i.e. do not use getPythiaFileReader)
@@ -184,7 +202,7 @@ Rules:
                              "HadronLevel:all = on",
                              "SUSY:all = on",
                              "TauDecays:mode = 0"]
-      Pythia_SUSY_LHC_13TeV: ["Print:quiet = on",
+      Pythia_SUSY_LHC_13TeV: ["Print:quiet = off",
                              "PartonLevel:MPI = off",
                              "PartonLevel:ISR = on",
                              "PartonLevel:FSR = off",
