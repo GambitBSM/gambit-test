@@ -5,11 +5,11 @@
 # Anders Kvellestad <anders.kvellestad@fys.uio.no>
 # December 2017
 
-# Test:
-#   gambit: ./data_gambit/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
-#   expected: ./data_expected/ColliderBit_eventloop.expected
-#   rtol: 1E-1
-#   email: anders.kvellestad@fys.uio.no
+Test:
+  gambit: ./data_gambit/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
+  expected: ./data_expected/ColliderBit_eventloop.expected
+  rtol: 1E-1
+  email: anders.kvellestad@fys.uio.no
 
 Parameters:
   StandardModel_SLHA2:
@@ -56,10 +56,9 @@ Parameters:
     SignMu:   1
 
 Printer:
-  printer: cout
-  # printer: ascii
-  # options:
-  #   output_file: "ColliderBit_eventloop.dat"
+  printer: ascii
+  options:
+    output_file: "ColliderBit_eventloop.dat"
 
 Scanner:
   use_scanner: random
