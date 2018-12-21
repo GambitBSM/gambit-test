@@ -76,7 +76,7 @@ Printer:
 
 Scanner:
   use_scanner: random
-  
+
   scanners:
 
     random:
@@ -113,14 +113,14 @@ ObsLikes:
   - capability: PICO_2L_LogLikelihood
     purpose:    LogLike
 
-  - capability: PICO_60_F_LogLikelihood
-    purpose:    LogLike
-
   - capability: PICO_60_2017_LogLikelihood
     purpose:    LogLike
 
+  - capability: PICO_60_LogLikelihood
+    purpose:    LogLike
+
 Rules:
-  # Choose to use functions that get Higgs decays from SUSY-HIT, and t decays 
+  # Choose to use functions that get Higgs decays from SUSY-HIT, and t decays
   # from DecayBit native implementation (instead of FeynHiggs)
   - capability: Reference_SM_Higgs_decay_rates
     function: Ref_SM_Higgs_decays_table
@@ -142,7 +142,7 @@ Rules:
   # Choose to get decays from DecayBit proper, not from an SLHA file.
   - capability: decay_rates
     function: all_decays
-      
+
   # Choose to rescale signals in direct and indirect detection by the relic density fraction
   - capability: RD_fraction
     #function: RD_fraction_rescaled # Rescale the local DM density
@@ -156,16 +156,16 @@ Rules:
   # Use DarkSUSY or MicrOmegas for calculating direct detection couplings
   - capability: DD_couplings
     function: DD_couplings_DarkSUSY
-    options: 
-      # If the below is true, 1 loop effects as discuseed in 
+    options:
+      # If the below is true, 1 loop effects as discuseed in
       # Drees Nojiri Phys.Rev. D48 (1993) 3483 are included
-      loop: true 
+      loop: true
       # If the below is false, the squark propagator is approximated as 1/m_sq^2
       # (automatically set to true if loop = true)
       # pole: false
     #function: DD_couplings_MicrOmegas
     #options:
-    #  # If the below is true, the box diagram for gluon-neutralino scattering as 
+    #  # If the below is true, the box diagram for gluon-neutralino scattering as
     #  # discussed in arXiv:0803.2360 is included in the calculation
     #  loop: box
 
@@ -176,7 +176,7 @@ Rules:
   - capability: unimproved_MSSM_spectrum
     function: get_MSSMatQ_spectrum_FS
     module: SpecBit
-   
+
 KeyValues:
   default_output_path: "data_gambit/DarkBit_lnL_DD"
   likelihood:
