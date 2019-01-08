@@ -67,7 +67,7 @@ BLOCK MASS
     2000004     3.124194298328446e+03   # ~u_5
 BLOCK SPINFO
     1   GAMBIT, using FlexibleSUSY
-    2   1.1.3 (GAMBIT); 2.0.beta (FlexibleSUSY)
+    2   1.2.1 (GAMBIT); 2.0.beta (FlexibleSUSY)
 BLOCK MINPAR
     3   1.000000000000000e+01   # # tanbeta(mZ)^DRbar
     4   1   # # sign(mu)
