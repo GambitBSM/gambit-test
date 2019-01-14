@@ -113,10 +113,10 @@ ObsLikes:
   - capability: PICO_2L_LogLikelihood
     purpose:    LogLike
 
-  - capability: PICO_60_2017_LogLikelihood
+  - capability: PICO_60_LogLikelihood
     purpose:    LogLike
 
-  - capability: PICO_60_LogLikelihood
+  - capability: PICO_60_2017_LogLikelihood
     purpose:    LogLike
 
 Rules:
