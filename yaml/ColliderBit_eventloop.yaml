@@ -169,6 +169,7 @@ Rules:
   - capability:  ColliderOperator
     function: operateLHCLoop
     options:
+      pythiaSeedBase: 1  # Set Pythia random seed so that we have identical, testable output
       pythiaNames: ["Pythia_SUSY_LHC_8TeV", "Pythia_SUSY_LHC_13TeV"]
       silenceLoop: true
 
