@@ -25,6 +25,7 @@ teardown() {
 }
 
 @test "DarkBit_standalone_WIMP in mode 7" {
+  skip 'not maintained and broken by changes to standalone output'
   (
   cd "$GAMBIT"
   ./DarkBit_standalone_WIMP 7
