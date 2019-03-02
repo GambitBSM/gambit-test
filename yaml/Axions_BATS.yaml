@@ -1,0 +1,120 @@
+##################################################
+# GAMBIT configuration for an axion BATS test.   #
+# Testing the axion-photon coupling likelihoods. #
+#                                                #
+# Author: Sebastian Hoof                         #
+##################################################
+
+Test:
+  gambit: ./data_gambit/Axions/samples/results.txt
+  expected: ./data_expected/Axions.expected
+  rtol: 1.0E-1
+  email: s.hoof15@imperial.ac.uk
+
+Parameters:
+  QCDAxion:
+    fa: 1.0E12
+    LambdaChi: 75.5
+    Tchi: 147.0
+    beta: 7.94
+    CaggQCD: 1.94
+    EoverN: 25.0
+    Caee: 1.0E3
+    thetai: 1.0
+  Halo_gNFW_rho0:
+    rho0: 0.4
+    v0: 235.0
+    vesc: 550.0
+    vrot: 235.0
+    rs: 20.0
+    r_sun: 8.5
+    alpha: 1
+    beta: 3
+    gamma: 1
+
+
+Priors:
+
+
+Scanner:
+  use_scanner: random
+
+  scanners:
+    random:
+      plugin: random
+      point_number: 1
+      like:  LogLike
+
+
+ObsLikes:
+  # likelihoods
+  - capability: lnL_rho0
+    purpose: LogLike
+  - capability: lnL_oh2
+    purpose: LogLike
+    function: lnL_oh2_upperlimit
+  - capability: lnL_CAST2007
+    purpose: LogLike
+  - capability: lnL_CAST2017
+    purpose: LogLike
+  - capability: lnL_ALPS1
+    purpose: LogLike
+  - capability: lnL_SN1987A
+    purpose: LogLike
+  - capability: lnL_Haloscope_ADMX1
+    purpose: LogLike
+  - capability: lnL_Haloscope_ADMX2
+    purpose: LogLike
+  - capability: lnL_Haloscope_RBF
+    purpose: LogLike
+  - capability: lnL_Haloscope_UF
+    purpose: LogLike
+  - capability: lnL_HESS_GCMF
+    purpose: LogLike
+  - capability: lnL_RParameter
+    purpose: LogLike
+  - capability: QCDAxion_ZeroTemperatureMass
+    purpose: LogLike
+  - capability: QCDAxion_TemperatureDependence
+    purpose: LogLike
+  - capability: QCDAxion_AxionPhotonConstant
+    purpose: LogLike
+  - capability: lnL_WDVar_G117B15A
+    purpose: LogLike
+  - capability: lnL_WDVar_R548
+    purpose: LogLike
+  - capability: lnL_WDVar_PG1351489
+    purpose: LogLike
+  - capability: lnL_WDVar_L192
+    purpose: LogLike
+  # Observables
+  - capability: AxionOscillationTemperature
+    purpose: Observable
+  - capability: RD_oh2
+    function: RD_oh2_Axions
+    purpose: Observable
+
+Rules:
+  - capability: RD_oh2
+    function: RD_oh2_Axions
+  - capability: RD_fraction
+    function: RD_fraction_leq_one
+
+Printer:
+  printer: ascii
+  options:
+    output_file: "results.txt"
+
+
+Logger:
+  redirection:
+    [Default] : "default.log"
+
+
+KeyValues:
+  dependency_resolution:
+    prefer_model_specific_functions: true
+  likelihood:
+    model_invalid_for_lnlike_below: -1e6
+  default_output_path: "./data_gambit/Axions"
+  debug: true

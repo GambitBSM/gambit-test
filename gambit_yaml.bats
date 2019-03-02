@@ -138,4 +138,11 @@ teardown() {
   [ $status = 0 ]
 }
 
+@test "Axion-related capabilities and likelihoods" {
+  local test=Axions_BATS
+  local yaml=./yaml/$test.yaml
+  source_yaml "$yaml"
+  run gambit_id_ascii_files "$yaml" "$Test_gambit" "$Test_expected" "$Test_rtol" "$Test_atol"
+  [ $status = 0 ]
+}
 
