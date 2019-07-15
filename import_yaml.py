@@ -51,7 +51,7 @@ class ImportLoader(yaml.Loader):
 
     def note_duplicates(self, node, deep=False):
         """
-        Raise error if duplicate keys (see
+        Note duplicated keys (see
         https://gist.github.com/pypt/94d747fe5180851196eb).
         """
         mapping = {}
