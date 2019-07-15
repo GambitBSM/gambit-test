@@ -39,8 +39,8 @@ class ImportLoader(yaml.Loader):
         """
         yamal_name = os.path.join(self._root, self.construct_scalar(node))
 
-        with open(yamal_name, 'r') as yamal_file:
-            return yaml.load(yamal_file, ImportLoader)
+        with open(yaml_name, 'r') as yaml_file:
+            return yaml.load(yaml_file, ImportLoader)
 
     def construct_tuple(self, node):
         """
