@@ -37,7 +37,7 @@ class ImportLoader(yaml.Loader):
         :returns: YAML file for inclusion
         :rtype: dict
         """
-        yamal_name = os.path.join(self._root, self.construct_scalar(node))
+        yaml_name = os.path.join(self._root, self.construct_scalar(node))
 
         with open(yaml_name, 'r') as yaml_file:
             return yaml.load(yaml_file, ImportLoader)
