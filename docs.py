@@ -13,10 +13,7 @@ from subprocess import check_output
 GAMBIT = os.environ["GAMBIT"]
 START = dict(models='MODEL', capabilities='CAPABILITIES')
 END = 'Calling MPI_Finalize'
-EXTRA = set(['DetAnalysisNumbers', 
-             'DetectorSim',
-             'ReconstructedEvent',
-             'DetAnalysisContainer'])
+EXTRA = set()
 
 
 def filter_(lines, start, end):
