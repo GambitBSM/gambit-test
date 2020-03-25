@@ -6,7 +6,7 @@ Test:
   gambit: ./data_gambit/invisible_decays_H_Z/samples/invisible_decays_H_Z.dat
   expected: ./data_expected/invisible_decays_H_Z.expected
   rtol: 1E-3
-  email: andrew.fowlie@monash.edu
+  email: andrew.j.fowlie@qq.com
 
 Parameters:
   StandardModel_SLHA2: !import StandardModel_SLHA2_defaults.yaml

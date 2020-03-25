@@ -6,7 +6,7 @@ Test:
   gambit: ./data_gambit/DarkBit_lnL_oh2/samples/DarkBit_lnL_oh2.dat
   expected: ./data_expected/DarkBit_lnL_oh2.expected
   rtol: 1E-1
-  email: andrew.fowlie@monash.edu cornellj@physics.mcgill.ca
+  email: andrew.j.fowlie@qq.com cornellj@physics.mcgill.ca
 
 Parameters:
 
