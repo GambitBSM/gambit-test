@@ -3,6 +3,7 @@ Parse relevant data from YAML file into BASH commands
 =====================================================
 """
 
+from __future__ import print_function
 from sys import argv
 from import_yaml import load
 
@@ -43,4 +44,4 @@ if __name__ == '__main__':
 
     assert len(argv) == 2
     YAML_NAME = argv[1]
-    print yaml_to_bash(YAML_NAME)
+    print(yaml_to_bash(YAML_NAME))

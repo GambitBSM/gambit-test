@@ -47,9 +47,7 @@ def docs(command):
     file_name = "{}/config/{}.dat".format(GAMBIT, command)
 
     with open(file_name, 'r') as yaml_file:
-        keys = load(yaml_file).keys()
-
-    return set(keys)
+        return set(load(yaml_file).keys())
 
 def call(command):
     """
