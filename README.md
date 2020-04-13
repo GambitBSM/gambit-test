@@ -8,7 +8,7 @@ Run all the BATS tests with output in `TAP` format:
 
     bats --tap *.bats
     
-There are three files:
+There are four files:
     
 - `funcs.bats`: tests my testing setup!
 - `gambit_io.bats`: io tests of gambit. E.g. does it return correct error codes?
