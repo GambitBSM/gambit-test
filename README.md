@@ -8,15 +8,18 @@ Run all the BATS tests with output in `TAP` format:
 
     bats --tap *.bats
     
-There are three files:
+There are four files:
     
 - `funcs.bats`: tests my testing setup!
 - `gambit_io.bats`: io tests of gambit. E.g. does it return correct error codes?
 - `gambit_yaml.bats`: Functional tests of gambit from yaml files.
+- `standalones.bats`: builds and checks the output of a few simple programs w/o calling gambit itself
+
+You may find the [BATS usage](https://github.com/bats-core/bats-core#usage) section the README helpful; it's possible to e.g., filter the tests that you run using a regular expression.
 
 # Dependencies
 
-Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [BATS](https://github.com/sstephenson/bats) and
+Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [BATS](https://github.com/bats-core/bats-core) and
 [PyYAML](https://pypi.python.org/pypi/PyYAML).
 
 # Writing a YAML test
@@ -36,7 +39,7 @@ There are two optional recognized entries: `rtol`, the relative tolerance, and `
  
 # Adding YAML test to BATS
 
-Add a test to `gambit_yaml.bats` by coping this template:
+Add a test to `gambit_yaml.bats` by copying this template:
 
     @test "ScannerBit_multinest with gambit" {
       local test=ScannerBit_multinest

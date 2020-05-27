@@ -2,8 +2,8 @@
 Parse relevant data from YAML file into BASH commands
 =====================================================
 """
-
 from __future__ import print_function
+
 from sys import argv
 from import_yaml import load
 
