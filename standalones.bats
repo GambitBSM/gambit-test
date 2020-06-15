@@ -33,82 +33,55 @@ teardown() {
 DATA_1705_07920="$GAMBIT"/DarkBit/data/benchmarks
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_1" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_gaugino.slha2 | tail -n15 > data_gambit/1705.07920_Model_1.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_gaugino.slha2 | tail -n15 > data_gambit/1705.07920_Model_1.txt
   run id_ascii_files data_gambit/1705.07920_Model_1.txt data_expected/1705.07920_Model_1.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_2" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_mixed.slha2 | tail -n15 > data_gambit/1705.07920_Model_2.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_mixed.slha2 | tail -n15 > data_gambit/1705.07920_Model_2.txt
   run id_ascii_files data_gambit/1705.07920_Model_2.txt data_expected/1705.07920_Model_2.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_3" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_higgsino.slha2 | tail -n15 > data_gambit/1705.07920_Model_3.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_higgsino.slha2 | tail -n15 > data_gambit/1705.07920_Model_3.txt
   run id_ascii_files data_gambit/1705.07920_Model_3.txt data_expected/1705.07920_Model_3.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_4" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/hZ_funnel.slha2 | tail -n15 > data_gambit/1705.07920_Model_4.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/hZ_funnel.slha2 | tail -n15 > data_gambit/1705.07920_Model_4.txt
   run id_ascii_files data_gambit/1705.07920_Model_4.txt data_expected/1705.07920_Model_4.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_5" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/stau_coannihilation.slha2 | tail -n15 > data_gambit/1705.07920_Model_5.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/stau_coannihilation.slha2 | tail -n15 > data_gambit/1705.07920_Model_5.txt
   run id_ascii_files data_gambit/1705.07920_Model_5.txt data_expected/1705.07920_Model_5.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_6" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/stop_coannihilation_gaugino.slha2 | tail -n15 > data_gambit/1705.07920_Model_6.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/stop_coannihilation_gaugino.slha2 | tail -n15 > data_gambit/1705.07920_Model_6.txt
   run id_ascii_files data_gambit/1705.07920_Model_6.txt data_expected/1705.07920_Model_6.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_7" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/stop_coannihilation_mixed.slha2 | tail -n15 > data_gambit/1705.07920_Model_7.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/stop_coannihilation_mixed.slha2 | tail -n15 > data_gambit/1705.07920_Model_7.txt
   run id_ascii_files data_gambit/1705.07920_Model_7.txt data_expected/1705.07920_Model_7.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_8" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/stop_coannihilation_higgsino.slha2 | tail -n15 > data_gambit/1705.07920_Model_8.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/stop_coannihilation_higgsino.slha2 | tail -n15 > data_gambit/1705.07920_Model_8.txt
   run id_ascii_files data_gambit/1705.07920_Model_8.txt data_expected/1705.07920_Model_8.txt 0.01 0.01
   [ $status = 0 ]
 }
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_9" {
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_MSSM "$DATA_1705_07920"/chargino_coannihilation.slha2 | tail -n15 > data_gambit/1705.07920_Model_9.txt
-  )
+  "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/chargino_coannihilation.slha2 | tail -n15 > data_gambit/1705.07920_Model_9.txt
   run id_ascii_files data_gambit/1705.07920_Model_9.txt data_expected/1705.07920_Model_9.txt 0.01 0.01
   [ $status = 0 ]
 }
