@@ -30,34 +30,6 @@ teardown() {
   [ $status = 0 ]
 }
 
-@test "DarkBit_standalone_WIMP in mode 7" {
-  skip 'not maintained and broken by changes to standalone output'
-  (
-  cd "$GAMBIT"
-  ./DarkBit_standalone_WIMP 7
-  )
-  cat "$GAMBIT"/LUX_2016_SD_table.dat \
-      "$GAMBIT"/LUX_2016_SI_table.dat \
-      "$GAMBIT"/PandaX_2017_SD_table.dat \
-      "$GAMBIT"/PandaX_2017_SI_table.dat \
-      "$GAMBIT"/PICO_60_2017_SD_table.dat \
-      "$GAMBIT"/PICO_60_2017_SI_table.dat \
-      "$GAMBIT"/XENON1T_2017_SD_table.dat \
-      "$GAMBIT"/XENON1T_2017_SI_table.dat > data_gambit/DarkBit_standalone_WIMP_7.dat
-
-  rm -f "$GAMBIT"/LUX_2016_SD_table.dat \
-        "$GAMBIT"/LUX_2016_SI_table.dat \
-        "$GAMBIT"/PandaX_2017_SD_table.dat \
-        "$GAMBIT"/PandaX_2017_SI_table.dat \
-        "$GAMBIT"/PICO_60_2017_SD_table.dat \
-        "$GAMBIT"/PICO_60_2017_SI_table.dat \
-        "$GAMBIT"/XENON1T_2017_SD_table.dat \
-        "$GAMBIT"/XENON1T_2017_SI_table.dat
-
-  run id_ascii_files data_gambit/DarkBit_standalone_WIMP_7.dat data_expected/DarkBit_standalone_WIMP_7.dat 0.01 0.01
-  [ $status = 0 ]
-}
-
 DATA_1705_07920="$GAMBIT"/DarkBit/data/benchmarks
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_1" {
