@@ -82,6 +82,10 @@ def load(stream):
 
 def duplicates(stream):
     """
+    :param stream: YAML file to be loaded
+    :type stream: Stream obj. File or str
+
+    :returns: Duplicated YAML file entries
     """
     loader = ImportLoader(stream)
     try:

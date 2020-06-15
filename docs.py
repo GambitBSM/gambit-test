@@ -1,16 +1,24 @@
 """
-Check descriptions
-==================
+Check gambit documentation in config files
+==========================================
+
+Usage e.g.,
+
+python docs.py capabilities extra
+
 """
 
-from import_yaml import load, duplicates
-
-import sys
 import os
 from subprocess import check_output
 
+from import_yaml import load, duplicates
 
-GAMBIT = os.environ["GAMBIT"]
+
+try:
+    GAMBIT = os.environ["GAMBIT"]
+except KeyError:
+    raise RuntimeError("You must export GAMBIT=/path/to/gambit/executable")
+
 START = dict(models='MODEL', capabilities='CAPABILITIES')
 END = 'Calling MPI_Finalize'
 EXTRA = set()
@@ -18,6 +26,7 @@ EXTRA = set()
 
 def filter_(lines, start, end):
     """
+    :returns: Iterator over non-trivial lines in gambit output
     """
     yield_ = False
 
@@ -32,9 +41,9 @@ def filter_(lines, start, end):
         elif yield_:
             yield line
 
-
 def dupes(command):
     """
+    :returns: Duplicated entries in gambit config
     """
     file_name = "{}/config/{}.dat".format(GAMBIT, command)
 
@@ -43,6 +52,7 @@ def dupes(command):
 
 def docs(command):
     """
+    :returns: Entries in gambit config
     """
     file_name = "{}/config/{}.dat".format(GAMBIT, command)
 
@@ -51,6 +61,7 @@ def docs(command):
 
 def call(command):
     """
+    :returns: Entries found when gambit called
     """
     shell = r"{}/gambit {} | sed 's/\x1b\[[0-9;]*m//g'".format(GAMBIT, command)
     output = check_output(shell, shell=True)
@@ -62,37 +73,43 @@ def call(command):
 
 def missing(command):
     """
+    :returns: Entries that are missing in gambit docs
     """
     return call(command) - docs(command)
-    
+
 def extra(command):
     """
+    :returns: Entries that are extra in gambit docs
     """
     return docs(command) - call(command)
 
 
 if __name__ == '__main__':
 
-    assert len(sys.argv) == 3
-    command = sys.argv[1]
-    mode = sys.argv[2]
-    assert command in ['capabilities', 'models']
-    assert mode in ['missing', 'duplicates', 'extra']
+    import argparse
 
-    if mode == 'missing':
+    parser = argparse.ArgumentParser(description='Check gambit documentation. You must export GAMBIT=...')
+    parser.add_argument('command', type=str, help='which documentation to check', choices=['capabilities', 'models'])
+    parser.add_argument('mode', type=str, help='which test to perform', choices=['missing', 'duplicates', 'extra'])
+    args = parser.parse_args()
 
-        missing_ = missing(command)
+    if args.mode == 'missing':
+
+        missing_ = missing(args.command)
         message = "The {}: {} were missing descriptions"
-        assert not missing_, message.format(command, missing_)
+        assert not missing_, message.format(args.command, missing_)
 
-    elif mode == 'extra':
-    
-        extra_ = extra(command)
-        message = "The {}: {} are extra"   
-        assert not extra_ or extra_ == EXTRA, message.format(command, extra_)
-    
-    else:
+    elif args.mode == 'extra':
 
-        duplicates_ = dupes(command)
+        extra_ = extra(args.command)
+        message = "The {}: {} are extra"
+        assert not extra_ or extra_ == EXTRA, message.format(args.command, extra_)
+
+    elif args.mode == "duplicates":
+
+        duplicates_ = dupes(args.command)
         message = "The {}: {} were duplicated"
-        assert not duplicates_, message.format(command, duplicates_)
+        assert not duplicates_, message.format(args.command, duplicates_)
+
+    else:
+        raise ValueError("Unknown mode: {}".format(args.mode))

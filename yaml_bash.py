@@ -4,7 +4,6 @@ Parse relevant data from YAML file into BASH commands
 """
 from __future__ import print_function
 
-from sys import argv
 from import_yaml import load
 
 
@@ -42,6 +41,10 @@ def yaml_to_bash(yaml_name):
 
 if __name__ == '__main__':
 
-    assert len(argv) == 2
-    YAML_NAME = argv[1]
-    print(yaml_to_bash(YAML_NAME))
+    import argparse
+
+    parser = argparse.ArgumentParser(description='Convert Bats blocks in YAML to bash')
+    parser.add_argument('yaml', type=str, help='name of yaml file')
+    args = parser.parse_args()
+
+    print(yaml_to_bash(args.yaml))
