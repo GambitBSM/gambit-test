@@ -9,7 +9,12 @@ python docs.py capabilities extra
 """
 
 import os
-from subprocess import check_output
+
+try:
+    from subprocess import getoutput
+except ImportError:
+    from subprocess import check_output
+    getoutput = lambda command: check_output(command, shell=True)
 
 from import_yaml import load, duplicates
 
@@ -20,7 +25,7 @@ except KeyError:
     raise RuntimeError("You must export GAMBIT=/path/to/gambit/executable")
 
 START = dict(models='MODEL', capabilities='CAPABILITIES')
-END = 'Calling MPI_Finalize'
+END = ['Calling MPI_Finalize', 'GAMBIT']
 EXTRA = set()
 
 
@@ -36,7 +41,7 @@ def filter_(lines, start, end):
             continue
         elif line.startswith(start):
             yield_ = True
-        elif line.startswith(end):
+        elif any(line.startswith(e) for e in end):
             break
         elif yield_:
             yield line
@@ -64,8 +69,7 @@ def call(command):
     :returns: Entries found when gambit called
     """
     shell = r"{}/gambit {} | sed 's/\x1b\[[0-9;]*m//g'".format(GAMBIT, command)
-    output = check_output(shell, shell=True)
-
+    output = getoutput(shell)
     lines = output.splitlines()
     items = [line.split()[0] for line in filter_(lines, START[command], END)]
 
