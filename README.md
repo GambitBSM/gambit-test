@@ -4,10 +4,10 @@ This repo contains scripts to perform tests on GAMBIT using [Bats](https://githu
 We check whether the output from running GAMBIT on a set of YAML files matches the expected output.
 
 The YAML files are contained in [`/yaml`](https://github.com/GambitBSM/gambit_bats/tree/master/yaml)
-and the expected output is contained in [`/data_expected/`](https://github.com/GambitBSM/gambit_bats/tree/master/yaml).
+and the expected output is contained in [`/data_expected`](https://github.com/GambitBSM/gambit_bats/tree/master/yaml).
 
 You can run the tests locally, as described below, or check the status of the current `master` branch
-at our [Jenkings webpage](http://simnel.ppe.gla.ac.uk:8080/job/Gambit-Centos7%20BATS/).
+at our [Jenkins webpage](http://simnel.ppe.gla.ac.uk:8080/job/Gambit-Centos7%20BATS/).
 
 # Running
 
