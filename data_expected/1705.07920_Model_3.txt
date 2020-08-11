@@ -1,15 +1,15 @@
 Omega h^2 from MicrOmegas: 0.0332574
-Omega h^2 from RD_oh2_general routine: 0.0587683
-Relic density lnL: -182.174
+Omega h^2 from RD_oh2_general routine: 0.058767
+Relic density lnL: -182.19
 
  sigma_SI_p [cm^2]: 
     MO: 2.11144e-44
-    DS: 1.89432e-44
+    DS: 1.89433e-44
  sigma_SD_p [cm^2]: 
     MO: 3.12084e-42
     DS: 3.28875e-42
 LUX 2016 lnL: -10.6444
-IceCube 79 lnL: -0.0382329
+IceCube 79 lnL: -0.0382332
 
-<sigma v> [cm^3/s]: 2.38575e-26
+<sigma v> [cm^3/s]: 2.38574e-26
 Fermi LAT dwarf spheroidal lnL: -33.4352
