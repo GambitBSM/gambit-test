@@ -4,7 +4,7 @@ This repo contains scripts to perform tests on GAMBIT using [Bats](https://githu
 We check whether the output from running GAMBIT on a set of YAML files matches the expected output.
 
 The YAML files are contained in [`/yaml`](https://github.com/GambitBSM/gambit-test/tree/master/yaml)
-and the expected output is contained in [`/data_expected`](https://github.com/GambitBSM/gambit-test/tree/master/yaml).
+and the expected output is contained in [`/data/expected`](https://github.com/GambitBSM/gambit-test/tree/master/data/expected).
 
 The BATS framework installed by cloning recursively:
 
@@ -18,14 +18,14 @@ First, set the directory of the GAMBIT executable named `gambit`:
 
 Then run all the Bats tests with output in `TAP` format:
 
-    bats --tap *.bats
+    ./test/bats/bin/bats test/*.bats
 
 There are four Bats files:
 
-- `funcs.bats`: tests my testing setup!
-- `gambit_io.bats`: io tests of gambit. E.g. does it return correct error codes?
-- `gambit_yaml.bats`: Functional tests of gambit from yaml files.
-- `standalones.bats`: builds and checks the output of a few simple programs w/o calling gambit itself
+- `funcs.bats`: tests gambit testing setup!
+- `io.bats`: io tests of gambit. E.g. does it return correct error codes?
+- `yaml.bats`: Functional tests of gambit from yaml files
+- `standalones.bats`: builds and checks the output of a few standalones w/o calling gambit itself
 
 You may find the [Bats usage](https://github.com/bats-core/bats-core#usage) section of the README helpful;
 it's possible to e.g., filter the tests that you run using a regular expression.
@@ -38,8 +38,6 @@ Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [Bats
     git clone --recursive https://github.com/GambitBSM/gambit-test
     apt install numdiff 
     pip install git+https://github.com/GambitBSM/gambit-yaml
-
-
 
 # Writing a YAML test
 
@@ -69,4 +67,4 @@ Add a test to `gambit_yaml.bats` by copying this template:
 and changing `ScannerBit_multinest with gambit` and `ScannerBit_multinest` to the description and
 name of your yaml file (excluding the `.yaml` extension).
 
-You must add the expected output (`Test:expected` in the YAML file) to the `./data_expected` directory.
+You must add the expected output (`Test:expected` in the YAML file) to the `./data/expected` directory.
