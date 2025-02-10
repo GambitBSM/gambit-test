@@ -23,7 +23,7 @@ First, set the directory of the GAMBIT executable named `gambit`:
 
 Then run all the Bats tests:
 
-    ./test/bats/bin/bats test/*.bats
+    ./gambit-test/test/bats/bin/bats ./gambit-test/test/*.bats
 
 There are four Bats files:
 
