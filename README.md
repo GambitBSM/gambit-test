@@ -1,4 +1,4 @@
-# Introduction
+# gambit-test
 
 This repo contains scripts to perform tests on GAMBIT using [Bats](https://github.com/bats-core/bats-core).
 We check whether the output from running GAMBIT on a set of YAML files matches the expected output.
@@ -6,17 +6,22 @@ We check whether the output from running GAMBIT on a set of YAML files matches t
 The YAML files are contained in [`/yaml`](https://github.com/GambitBSM/gambit-test/tree/master/yaml)
 and the expected output is contained in [`/data/expected`](https://github.com/GambitBSM/gambit-test/tree/master/data/expected).
 
-The BATS framework installed by cloning recursively:
+## Installation
 
-   git clone --recursive https://github.com/GambitBSM/gambit-test
+Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [Bats](https://github.com/bats-core/bats-core) and
+[gambit-yaml](https://github.com/GambitBSM/gambit-yaml). E.g.,
 
-# Running
+    git clone --recursive https://github.com/GambitBSM/gambit-test
+    apt install numdiff 
+    pip install git+https://github.com/GambitBSM/gambit-yaml
+
+## Running
 
 First, set the directory of the GAMBIT executable named `gambit`:
 
     export GAMBIT= ... path to gambit executable ...
 
-Then run all the Bats tests with output in `TAP` format:
+Then run all the Bats tests:
 
     ./test/bats/bin/bats test/*.bats
 
@@ -30,16 +35,7 @@ There are four Bats files:
 You may find the [Bats usage](https://github.com/bats-core/bats-core#usage) section of the README helpful;
 it's possible to e.g., filter the tests that you run using a regular expression.
 
-# Dependencies
-
-Other than GAMBIT, we require [numdiff](https://github.com/tjhei/numdiff), [Bats](https://github.com/bats-core/bats-core) and
-[gambit-yaml](https://github.com/GambitBSM/gambit-yaml). E.g.,
-
-    git clone --recursive https://github.com/GambitBSM/gambit-test
-    apt install numdiff 
-    pip install git+https://github.com/GambitBSM/gambit-yaml
-
-# Writing a YAML test
+## Writing a YAML test
 
 The YAML files must contain a special `Test` block with testing information, e.g.,
 
@@ -56,7 +52,7 @@ There are two optional recognized entries: `rtol`, the relative tolerance, and `
 If `rtol` (`atol`) is not supplied, arbitrarily large relative (absolute) differences won't cause an error.
 Files are tested in `numdiff --strict` mode, such that `atol` and `rtol` must both pass.
  
-# Adding YAML test to Bats
+## Adding YAML test to Bats
 
 Add a test to `gambit_yaml.bats` by copying this template:
 
