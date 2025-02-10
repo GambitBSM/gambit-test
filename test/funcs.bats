@@ -8,7 +8,7 @@ load test_helper/bats-assert/load
 load test_helper/bats-support/load
 load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
 
-DIR=$(dirname "$BATS_TEST_FILENAME")/..
+DATA=$(dirname "$BATS_TEST_FILENAME")/../data
 
 # Echo information on teardown, if error
 teardown() {
