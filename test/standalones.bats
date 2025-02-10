@@ -1,20 +1,14 @@
 #!/usr/bin/env bats
 #
 # Tests of standalones in bats framework
-#
-# Written by A. Fowlie
+
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
-load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
 
-DATA=$(dirname "$BATS_TEST_FILENAME")/../data
 
-# Echo information on teardown, if error
-teardown() {
-  error "$output"
-  rm -rf runs
-}
+DATA_1705_07920="$GAMBIT"/DarkBit/data/benchmarks
+
 
 @test "build DarkBit_standalone_WIMP" {
   cd "$GAMBIT"/build
@@ -27,8 +21,6 @@ teardown() {
   run make DarkBit_standalone_MSSM
   assert_success
 }
-
-DATA_1705_07920="$GAMBIT"/DarkBit/data/benchmarks
 
 @test "DarkBit_standalone_MSSM_1705.07920_Model_1" {
   "$GAMBIT"/DarkBit_standalone_MSSM "$DATA_1705_07920"/HA_funnel_gaugino.slha2 | tail -n15 > "$DATA"/run/1705.07920_Model_1.txt

@@ -1,24 +1,12 @@
 #!/usr/bin/env bats
 #
 # GAMBIT basic i/o tests in BATS framework
-#
-# Written by A. Fowlie
+
 
 load test_helper/bats-assert/load
 load test_helper/bats-file/load
 load test_helper/bats-support/load
-load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
 
-YAML=$(dirname "$BATS_TEST_FILENAME")/../yaml
-
-# Echo information on teardown, if error
-teardown() {
-  error "$output"
-  rm -rf ./runs  # This shouldn't be necessary
-  rm -rf $GAMBIT/runs  # This shouldn't be necessary
-}
-
-# BAT framework tests - make information as descriptive as possible.
 
 @test "relative yaml imports gambit" {
   run $GAMBIT/gambit -f "$YAML"/import.yaml

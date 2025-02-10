@@ -1,19 +1,11 @@
 #!/usr/bin/env bats
 #
 # Tests of docs in BATS framework
-#
-# Written by A. Fowlie
+
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
-load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
 
-SRC=$(dirname "$BATS_TEST_FILENAME")/../src
-
-# Echo information on teardown, if error
-teardown() {
-  error "$output"
-}
 
 @test "check for capabilities that are missing in docs" {
   run python "$SRC"/docs.py capabilities missing

@@ -1,21 +1,12 @@
 #!/usr/bin/env bats
 #
 # Tests of helper functions in BATS framework
-#
-# Written by A. Fowlie
+
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
-load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
+load "$BATS_TEST_DIRNAME"/../src/gambit
 
-DATA=$(dirname "$BATS_TEST_FILENAME")/../data
-
-# Echo information on teardown, if error
-teardown() {
-  error "$output"
-}
-
-# BAT framework tests - make information as descriptive as possible.
 
 @test "identical files using id_ascii_files" {
   run id_ascii_files "$DATA"/expected/id_1.dat "$DATA"/expected/id_2.dat 0. 0.

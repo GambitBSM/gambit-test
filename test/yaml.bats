@@ -1,23 +1,12 @@
 #!/usr/bin/env bats
 #
 # GAMBIT tests of yaml files BATS framework
-#
-# Written by A. Fowlie
+
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
-load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
+load "$BATS_TEST_DIRNAME"/../src/gambit
 
-YAML=$(dirname "$BATS_TEST_FILENAME")/../yaml
-
-# Echo information on teardown, if error, & remove output files if present (should not be in most cases)
-teardown() {
-  error "$output"
-  error email = "$Test_email"
-  rm -f Key.dat  # This file should never be generated
-}
-
-# BAT framework tests - make information as descriptive as possible.
 
 @test "FlexibleSUSY_MSSM11 benchmark point with gambit" {
   run gambit_id_ascii_files "$YAML"/FlexibleSUSY_MSSM11.yaml
