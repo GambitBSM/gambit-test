@@ -2,9 +2,9 @@
 Parse relevant data from YAML file into BASH commands
 =====================================================
 """
-from __future__ import print_function
 
-from import_yaml import load
+
+from gambit_yaml import load
 
 
 BLOCK = 'Test'
@@ -43,7 +43,8 @@ if __name__ == '__main__':
 
     import argparse
 
-    parser = argparse.ArgumentParser(description='Convert Bats blocks in YAML to bash')
+    parser = argparse.ArgumentParser(
+        description='Convert Bats blocks in YAML to bash')
     parser.add_argument('yaml', type=str, help='name of yaml file')
     args = parser.parse_args()
 

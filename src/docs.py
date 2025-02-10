@@ -9,20 +9,16 @@ python docs.py capabilities extra
 """
 
 import os
+from subprocess import check_output
 
-try:
-    from subprocess import getoutput
-except ImportError:
-    from subprocess import check_output
-    getoutput = lambda command: check_output(command, shell=True)
-
-from import_yaml import load, duplicates
+from gambit_yaml import load, duplicates
 
 
 try:
     GAMBIT = os.environ["GAMBIT"]
 except KeyError:
     raise RuntimeError("You must export GAMBIT=/path/to/gambit/executable")
+
 
 START = dict(models='MODEL', capabilities='CAPABILITIES')
 END = ['Calling MPI_Finalize', 'GAMBIT']
@@ -46,6 +42,7 @@ def filter_(lines, start, end):
         elif yield_:
             yield line
 
+
 def dupes(command):
     """
     :returns: Duplicated entries in gambit config
@@ -54,6 +51,7 @@ def dupes(command):
 
     with open(file_name, 'r') as yaml_file:
         return duplicates(yaml_file)
+
 
 def docs(command):
     """
@@ -64,22 +62,23 @@ def docs(command):
     with open(file_name, 'r') as yaml_file:
         return set(load(yaml_file).keys())
 
+
 def call(command):
     """
     :returns: Entries found when gambit called
     """
     shell = r"{}/gambit {} | sed 's/\x1b\[[0-9;]*m//g'".format(GAMBIT, command)
-    output = getoutput(shell)
+    output = check_output(shell, shell=True)
     lines = output.splitlines()
-    items = [line.split()[0] for line in filter_(lines, START[command], END)]
+    return {line.split()[0] for line in filter_(lines, START[command], END)}
 
-    return set(items)
 
 def missing(command):
     """
     :returns: Entries that are missing in gambit docs
     """
     return call(command) - docs(command)
+
 
 def extra(command):
     """
@@ -92,9 +91,12 @@ if __name__ == '__main__':
 
     import argparse
 
-    parser = argparse.ArgumentParser(description='Check gambit documentation. You must export GAMBIT=...')
-    parser.add_argument('command', type=str, help='which documentation to check', choices=['capabilities', 'models'])
-    parser.add_argument('mode', type=str, help='which test to perform', choices=['missing', 'duplicates', 'extra'])
+    parser = argparse.ArgumentParser(
+        description='Check gambit documentation. You must export GAMBIT=...')
+    parser.add_argument('command', type=str, help='which documentation to check', choices=[
+                        'capabilities', 'models'])
+    parser.add_argument('mode', type=str, help='which test to perform', choices=[
+                        'missing', 'duplicates', 'extra'])
     args = parser.parse_args()
 
     if args.mode == 'missing':
@@ -107,7 +109,8 @@ if __name__ == '__main__':
 
         extra_ = extra(args.command)
         message = "The {}: {} are extra"
-        assert not extra_ or extra_ == EXTRA, message.format(args.command, extra_)
+        assert not extra_ or extra_ == EXTRA, message.format(
+            args.command, extra_)
 
     elif args.mode == "duplicates":
 
