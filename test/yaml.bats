@@ -6,7 +6,7 @@
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
-load ../src/gambit
+load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
 
 YAML=$(dirname "$BATS_TEST_FILENAME")/../yaml
 
@@ -19,8 +19,8 @@ teardown() {
 
 # BAT framework tests - make information as descriptive as possible.
 
-@test "FlexibleSUSY_MSSM11 with gambit" {
-  run gambit_id_ascii_files "$YAML"/MSSM11_test.yaml
+@test "FlexibleSUSY_MSSM11 benchmark point with gambit" {
+  run gambit_id_ascii_files "$YAML"/FlexibleSUSY_MSSM11.yaml
   assert_success
 }
 
@@ -83,16 +83,16 @@ teardown() {
 }
 
 @test "DecayBit H and Z invisible decays with gambit" {
-  run gambit_id_ascii_files "$YAML"/invisible_decays_H_Z.yaml
+  run gambit_id_ascii_files "$YAML"/PrecisionBit_invisible_decays.yaml
   assert_success
 }
 
 @test "FlavBit Wilson coefficients with gambit" {
-  run gambit_id_ascii_files "$YAML"/WC_test.yaml
+  run gambit_id_ascii_files "$YAML"/FlavBit_WC.yaml
   assert_success
 }
 
 @test "Axion-related capabilities and likelihoods" {
-  run gambit_id_ascii_files"$YAML"/Axions_BATS.yaml
+  run gambit_id_ascii_files"$YAML"/Axions.yaml
   assert_success
 }

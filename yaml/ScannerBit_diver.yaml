@@ -8,8 +8,8 @@
 
 # BATS testing parameters
 Test:
-  gambit: ./data_gambit/ScannerBit_diver/samples/ScannerBit_diver.dat
-  expected: ./data_expected/ScannerBit_diver.expected
+  gambit: ./data/run/ScannerBit_diver/samples/ScannerBit_diver.dat
+  expected: ./data/expected/ScannerBit_diver.expected
   rtol: 1E-9
   email: ben.farmer@gmail.com
 
@@ -81,4 +81,4 @@ KeyValues:
   likelihood:
     model_invalid_for_lnlike_below: -1e6
 
-  default_output_path: "data_gambit/ScannerBit_diver"
+  default_output_path: "data/run/ScannerBit_diver"

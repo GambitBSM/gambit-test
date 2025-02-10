@@ -3,8 +3,8 @@
 # Written by J. Cornell.
 
 Test:
-  gambit: ./data_gambit/DarkBit_lnL_GammaRays/samples/DarkBit_lnL_GammaRays.dat
-  expected: ./data_expected/DarkBit_lnL_GammaRays.expected
+  gambit: ./data/run/DarkBit_lnL_GammaRays/samples/DarkBit_lnL_GammaRays.dat
+  expected: ./data/expected/DarkBit_lnL_GammaRays.expected
   rtol: 1E-1
   email: cornellj@physics.mcgill.ca
 
@@ -153,7 +153,7 @@ Rules:
     module: SpecBit
    
 KeyValues:
-  default_output_path: "data_gambit/DarkBit_lnL_GammaRays"
+  default_output_path: "data/run/DarkBit_lnL_GammaRays"
   likelihood:
     model_invalid_for_lnlike_below: -1e6
 

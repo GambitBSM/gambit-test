@@ -6,7 +6,7 @@
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
-load ../src/gambit
+load $(dirname "$BATS_TEST_FILENAME")/../src/gambit
 
 SRC=$(dirname "$BATS_TEST_FILENAME")/../src
 

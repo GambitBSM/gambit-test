@@ -3,10 +3,10 @@
 # Written by A. Fowlie
 
 Test:
-  gambit: ./data_gambit/invisible_decays_H_Z/samples/invisible_decays_H_Z.dat
-  expected: ./data_expected/invisible_decays_H_Z.expected
+  gambit: ./data/run/invisible_decays_H_Z/samples/invisible_decays_H_Z.dat
+  expected: ./data/expected/invisible_decays_H_Z.expected
   rtol: 1E-3
-  email: andrew.j.fowlie@qq.com
+  email: andrew.j.fowlie@gmail.com
 
 Parameters:
   StandardModel_SLHA2: !import StandardModel_SLHA2_defaults.yaml
@@ -67,6 +67,6 @@ Rules:
         h0_1: 125.
 
 KeyValues:
-  default_output_path: "data_gambit/invisible_decays_H_Z"
+  default_output_path: "data/run/invisible_decays_H_Z"
   likelihood:
     model_invalid_for_lnlike_below: -1e11

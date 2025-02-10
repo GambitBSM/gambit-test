@@ -7,8 +7,8 @@
 
 
 Test:
-   gambit: ./data_gambit/FlavBit_WC/samples/FlavBit_WC.dat
-   expected: ./data_expected/FlavBit_WC.expected
+   gambit: ./data/run/FlavBit_WC/samples/FlavBit_WC.dat
+   expected: ./data/expected/FlavBit_WC.expected
    rtol: 1E-3
    email: mchrzasz@cern.ch
         
@@ -147,7 +147,7 @@ KeyValues:
   dependency_resolution:
     prefer_model_specific_functions: true
 
-  default_output_path: "data_gambit/FlavBit_WC"
+  default_output_path: "data/run/FlavBit_WC"
 
   likelihood:
     model_invalid_for_lnlike_below: -5e5

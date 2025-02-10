@@ -7,8 +7,8 @@
 # November 2016
 
 Test:
-  gambit: ./data_gambit/ColliderBit_LEPSUSY/samples/ColliderBit_LEPSUSY.dat
-  expected: ./data_expected/ColliderBit_LEPSUSY.expected
+  gambit: ./data/run/ColliderBit_LEPSUSY/samples/ColliderBit_LEPSUSY.dat
+  expected: ./data/expected/ColliderBit_LEPSUSY.expected
   rtol: 1E-3
   email: ahye@fys.uio.no
 
@@ -156,7 +156,7 @@ Logger:
 
   # Redirectory of specific messages according to tags
 
-  prefix : "data_gambit/ColliderBit_LEPSUSY/logs/"
+  prefix : "data/run/ColliderBit_LEPSUSY/logs/"
   redirection:
     [Debug] : "debug.log"
     [Default] : "default.log"
@@ -168,6 +168,6 @@ Logger:
     [ColliderBit] : "ColliderBit.log"
 
 KeyValues:
-  default_output_path: "data_gambit/ColliderBit_LEPSUSY"
+  default_output_path: "data/run/ColliderBit_LEPSUSY"
   likelihood:
     model_invalid_for_lnlike_below: -1e11

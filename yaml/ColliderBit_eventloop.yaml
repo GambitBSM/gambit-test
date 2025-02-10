@@ -6,8 +6,8 @@
 # December 2017
 
 Test:
-  gambit: ./data_gambit/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
-  expected: ./data_expected/ColliderBit_eventloop.expected
+  gambit: ./data/run/ColliderBit_eventloop/samples/ColliderBit_eventloop.dat
+  expected: ./data/expected/ColliderBit_eventloop.expected
   rtol: 1E-1
   email: anders.kvellestad@fys.uio.no
 
@@ -335,7 +335,7 @@ Logger:
 
   # Redirectory of specific messages according to tags
 
-  prefix : "data_gambit/ColliderBit_eventloop/logs/"
+  prefix : "data/run/ColliderBit_eventloop/logs/"
   redirection:
     [Debug] : "debug.log"
     [Default] : "default.log"
@@ -347,6 +347,6 @@ Logger:
     [ColliderBit] : "ColliderBit.log"
 
 KeyValues:
-  default_output_path: "data_gambit/ColliderBit_eventloop"
+  default_output_path: "data/run/ColliderBit_eventloop"
   likelihood:
     model_invalid_for_lnlike_below: -1e11

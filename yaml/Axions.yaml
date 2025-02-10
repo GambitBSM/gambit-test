@@ -6,8 +6,8 @@
 ##################################################
 
 Test:
-  gambit: ./data_gambit/Axions/samples/results.txt
-  expected: ./data_expected/Axions.expected
+  gambit: ./data/run/Axions/samples/results.txt
+  expected: ./data/expected/Axions.expected
   rtol: 1.0E-1
   email: s.hoof15@imperial.ac.uk
 
@@ -116,5 +116,5 @@ KeyValues:
     prefer_model_specific_functions: true
   likelihood:
     model_invalid_for_lnlike_below: -1e6
-  default_output_path: "./data_gambit/Axions"
+  default_output_path: "./data/run/Axions"
   debug: true

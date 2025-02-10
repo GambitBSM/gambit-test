@@ -55,8 +55,8 @@ Printer:
     output_file: "results.txt"
 
 Test:
-  gambit: ./data_gambit/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum.slha2
-  expected: ./data_expected/SpecBit_FS_MSSM11_mA.expected
+  gambit: ./data/run/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum.slha2
+  expected: ./data/expected/SpecBit_FS_MSSM11_mA.expected
   rtol: 1E-4
   atol: 1E-4
   email: peter.athron@coepp.org.au
@@ -103,7 +103,7 @@ Rules:
   # Tell all functions that are able to dump SLHA files to do so.
   - options:
       drop_SLHA_file: true
-      SLHA_output_filename: "data_gambit/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum"
+      SLHA_output_filename: "data/run/FlexibleSUSY_MSSM11_mA/GAMBIT_spectrum"
   # Globally permit maximal mixing between gauge and family eigenstates
   - options:
       gauge_mixing_tolerance: 0.5
@@ -381,6 +381,6 @@ KeyValues:
     model_invalid_for_lnlike_below: -5e5
     model_invalid_for_lnlike_below_alt: -1e5
 
-  default_output_path: "data_gambit/FlexibleSUSY_MSSM11_mA/"
+  default_output_path: "data/run/FlexibleSUSY_MSSM11_mA/"
 
   debug: false

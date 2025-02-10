@@ -3,8 +3,8 @@
 # Written by J. Cornell.
 
 Test:
-  gambit: ./data_gambit/DarkBit_lnL_DD/samples/DarkBit_lnL_DD.dat
-  expected: ./data_expected/DarkBit_lnL_DD.expected
+  gambit: ./data/run/DarkBit_lnL_DD/samples/DarkBit_lnL_DD.dat
+  expected: ./data/expected/DarkBit_lnL_DD.expected
   rtol: 1E-1
   email: cornellj@physics.mcgill.ca
 
@@ -178,7 +178,7 @@ Rules:
     module: SpecBit
 
 KeyValues:
-  default_output_path: "data_gambit/DarkBit_lnL_DD"
+  default_output_path: "data/run/DarkBit_lnL_DD"
   likelihood:
     model_invalid_for_lnlike_below: -1e6
 

@@ -3,8 +3,8 @@
 # Written by A. Fowlie.
 
 Test:
-  gambit: ./data_gambit/ScannerBit_multinest/scanner_plugins/MultiNest/native-stats.dat
-  expected: ./data_expected/ScannerBit_multinest.expected
+  gambit: ./data/run/ScannerBit_multinest/scanner_plugins/MultiNest/native-stats.dat
+  expected: ./data/expected/ScannerBit_multinest.expected
   rtol: 1E-1
   email: andrew.j.fowlie@qq.com
 
@@ -37,6 +37,6 @@ ObsLikes:
     type: double
 
 KeyValues:
-  default_output_path: "data_gambit/ScannerBit_multinest"
+  default_output_path: "data/run/ScannerBit_multinest"
   likelihood:
     model_invalid_for_lnlike_below: -1e6

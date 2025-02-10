@@ -34,7 +34,7 @@ gambit_id_ascii_files() {
 
   # Safely delete an existing GAMBIT result file
 
-  if [ -n "$Test_gambita" ] && [ -f "$Test_gambit" ] && [ -n "$(find ./data_gambit -wholename "$Test_gambit")" ]; then
+  if [ -n "$Test_gambit" ] && [ -f "$Test_gambit" ] && [ -n "$(find ./"$DATA"/gambit -wholename "$Test_gambit")" ]; then
     rm -f "$Test_gambit"
   fi
   

@@ -27,6 +27,6 @@ ObsLikes:
     type: double
 
 KeyValues:
-  default_output_path: "data_gambit/dummy"
+  default_output_path: "data/run/dummy"
   likelihood:
     model_invalid_for_lnlike_below: -1e6
