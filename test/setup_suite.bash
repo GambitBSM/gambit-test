@@ -7,6 +7,7 @@ setup_suite() {
     return 1
   fi
 
+  export GAMBIT_TEST="$BATS_TEST_DIRNAME"/..
   export YAML="$BATS_TEST_DIRNAME"/../yaml
   export DATA="$BATS_TEST_DIRNAME"/../data
   export SRC="$BATS_TEST_DIRNAME"/../src

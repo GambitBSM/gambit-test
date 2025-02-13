@@ -5,6 +5,7 @@
 
 load test_helper/bats-assert/load
 load test_helper/bats-support/load
+load "$BATS_TEST_DIRNAME"/../src/gambit
 
 
 DATA_1705_07920="$GAMBIT"/DarkBit/data/benchmarks

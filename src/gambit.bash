@@ -23,7 +23,7 @@ id_ascii_files() {
 # Source YAML file into bash
 source_yaml() {
   local yaml=$1
-  eval "$(python yaml_bash.py "$yaml")"
+  eval "$(python "$SRC"/yaml_bash.py "$yaml")"
 }
 
 # Test a ./gambit -f call against expected ascii output
@@ -31,7 +31,6 @@ gambit_id_ascii_files() {
 
   local yaml=$1
   
-
   # Safely delete an existing GAMBIT result file
 
   if [ -n "$Test_gambit" ] && [ -f "$Test_gambit" ] && [ -n "$(find "$DATA"/gambit -wholename "$Test_gambit")" ]; then
@@ -52,5 +51,7 @@ gambit_id_ascii_files() {
   
   # Check GAMBIT result file against expected file
   
-  numdiff --strict -r "$Test_rtol" -a "$Test_atol" "$Test_gambit" "$Test_expected"
+  source_yaml "$yaml"
+  
+  numdiff --strict -r "$Test_rtol" -a "$Test_atol" "$GAMBIT_TEST"/"$Test_gambit" "$GAMBIT_TEST"/"$Test_expected"
 }

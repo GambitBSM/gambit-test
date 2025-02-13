@@ -82,6 +82,6 @@ load "$BATS_TEST_DIRNAME"/../src/gambit
 }
 
 @test "Axion-related capabilities and likelihoods" {
-  run gambit_id_ascii_files"$YAML"/Axions.yaml
+  run gambit_id_ascii_files "$YAML"/Axions.yaml
   assert_success
 }
