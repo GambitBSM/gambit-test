@@ -28,7 +28,7 @@ load test_helper/bats-support/load
 }
 
 @test "check for capabilities that are extra in docs" {
-  run python docs.py capabilities extra
+  run python "$SRC"/docs.py capabilities extra
   assert_success
 }
 
